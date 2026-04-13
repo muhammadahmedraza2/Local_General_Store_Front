@@ -1,0 +1,28 @@
+<div class="container">
+
+  <header class="header">
+    <h1>🛒 Smart General Store</h1>
+    <a href="/cart" class="cart-btn">Cart 🛍️</a>
+  </header>
+
+  <div class="grid">
+
+    <div class="card" *ngFor="let p of products">
+
+      <div class="img-box">
+        <img [src]="p.image || 'assets/no-image.png'" />
+      </div>
+
+      <div class="content">
+        <h3>{{ p.name || '--' }}</h3>
+        <p class="category">{{ p.category || '--' }}</p>
+        <p class="price">Rs {{ p.price || '--' }}</p>
+
+        <button (click)="addToCart(p)">Add to Cart</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

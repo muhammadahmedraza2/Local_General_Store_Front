@@ -1,0 +1,87 @@
+.layout {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 240px;
+  background: linear-gradient(180deg, #1e272e, #2f3640);
+  color: white;
+  padding: 20px;
+  transition: 0.3s;
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+/* LOGO */
+.logo {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* NAV */
+nav a {
+  display: block;
+  padding: 10px;
+  color: #dcdde1;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: 0.3s;
+  white-space: nowrap;
+}
+
+nav a:hover {
+  background: #00cec9;
+  color: white;
+}
+
+.active {
+  background: #00b894;
+  color: white;
+}
+
+/* MAIN */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOPBAR */
+.topbar {
+  background: white;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* TOGGLE BUTTON */
+.toggle-btn {
+  background: #2d3436;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.toggle-btn:hover {
+  background: #00b894;
+}
+
+/* CONTENT */
+.content {
+  padding: 20px;
+  background: #f5f6fa;
+  flex: 1;
+}

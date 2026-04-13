@@ -1,0 +1,33 @@
+<div class="product-card">
+
+  <div class="badge" *ngIf="product?.category">
+    {{ product.category }}
+  </div>
+
+  <div class="image-box">
+    <img [src]="product?.image || 'assets/no-image.png'" />
+  </div>
+
+  <div class="details">
+
+    <h3>{{ product?.name || '--' }}</h3>
+
+    <p class="desc">
+      {{ product?.description || 'No description available' }}
+    </p>
+
+    <div class="bottom">
+
+      <span class="price">
+        Rs {{ product?.price || '--' }}
+      </span>
+
+      <button (click)="addToCart()">
+        🛒 Add
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,43 @@
+.invoice {
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: #2d3436;
+  color: white;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.invoice-total {
+  text-align: right;
+  margin-top: 15px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+}

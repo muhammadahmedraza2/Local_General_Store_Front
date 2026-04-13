@@ -1,0 +1,38 @@
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" [class.collapsed]="isCollapsed">
+
+    <div class="logo">
+      🛒 {{ isCollapsed ? 'Store' : 'Store Panel' }}
+    </div>
+
+    <nav>
+      <a routerLink="/" routerLinkActive="active">🏠 {{ isCollapsed ? '' : 'Home' }}</a>
+      <a routerLink="/cart" routerLinkActive="active">🛍️ {{ isCollapsed ? '' : 'Cart' }}</a>
+      <a routerLink="/invoice" routerLinkActive="active">🧾 {{ isCollapsed ? '' : 'Invoice' }}</a>
+    </nav>
+
+  </aside>
+
+  <!-- MAIN AREA -->
+  <div class="main">
+
+    <header class="topbar">
+
+      <!-- TOGGLE BUTTON -->
+      <button class="toggle-btn" (click)="toggleSidebar()">
+        ☰
+      </button>
+
+      <h3>Local General Store System</h3>
+
+    </header>
+
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+
+</div>
