@@ -1,0 +1,39 @@
+<div class="container">
+
+  <h2>Order History</h2>
+
+  <div class="order-card" *ngFor="let order of orders">
+
+    <!-- HEADER -->
+    <div class="order-header">
+      <div>
+        <p class="order-no">Order Number: {{ order.orderNumber }}</p>
+        <p class="date">{{ order.date }}</p>
+      </div>
+
+      <div class="right">
+        <p class="status">{{ order.status }}</p>
+        <p class="total">Total: ${{ order.total }}</p>
+      </div>
+    </div>
+
+    <!-- ITEMS -->
+    <div class="items">
+
+      <div class="item" *ngFor="let item of order.items">
+
+        <img [src]="item.image" />
+
+        <div class="info">
+          <h4>{{ item.productName }}</h4>
+          <p>Qty: {{ item.quantity }}</p>
+          <p>Price: ${{ item.price }}</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

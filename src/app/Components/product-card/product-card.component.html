@@ -1,29 +1,29 @@
 <div class="product-card">
 
-  <div class="badge" *ngIf="product?.category">
+  <div class="badge">
     {{ product.category }}
   </div>
 
   <div class="image-box">
-    <img [src]="product?.image || 'assets/no-image.png'" />
+    <img [src]="product.image || 'assets/no-image.png'" />
   </div>
 
   <div class="details">
 
-    <h3>{{ product?.name || '--' }}</h3>
+    <h3>{{ product.name }}</h3>
 
-    <p class="desc">
-      {{ product?.description || 'No description available' }}
+    <p>
+      Size: {{ product.size }}
     </p>
 
     <div class="bottom">
 
       <span class="price">
-        Rs {{ product?.price || '--' }}
+        Rs {{ product.price }}
       </span>
 
       <button (click)="addToCart()">
-        🛒 Add
+        🛒 Add to Cart
       </button>
 
     </div>

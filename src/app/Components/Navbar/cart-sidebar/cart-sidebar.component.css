@@ -1,0 +1,114 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: 380px;
+  height: 100%;
+  background: #fff;
+  z-index: 1000;
+  transition: 0.3s;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* CART ITEM */
+.cart-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 15px 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.cart-item img {
+  width: 60px;
+  border-radius: 10px;
+}
+
+.info {
+  flex: 1;
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qty button {
+  width: 25px;
+  height: 25px;
+  border: none;
+  background: #ddd;
+  border-radius: 5px;
+}
+
+/* DELETE */
+.delete {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* SECTIONS */
+.section {
+  margin-top: 15px;
+  padding: 10px;
+  background: #f7f7f7;
+  border-radius: 10px;
+}
+
+/* SUMMARY */
+.summary {
+  margin-top: 20px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.total {
+  font-weight: bold;
+}
+
+/* CHECKOUT BUTTON */
+.checkout {
+  width: 100%;
+  padding: 15px;
+  margin-top: 15px;
+  background: linear-gradient(90deg, #4f46e5, #2563eb);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}

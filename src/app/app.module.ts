@@ -8,8 +8,11 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './Components/home/home.component';
 import { CartComponent } from './Components/cart/cart.component';
 import { InvoiceComponent } from './Components/invoice/invoice.component';
-import { ProductComponent } from './Components/product-card/product-card.component';
 import { LayoutComponent } from './Components/Navbar/layout/layout.component';
+import { ProductListComponent } from './Components/product-list/product-list.component';
+import { ProductCardComponent } from './Components/product-card/product-card.component';
+import { CartSidebarComponent } from './Components/Navbar/cart-sidebar/cart-sidebar.component';
+import { OrderHistoryComponent } from './Components/order-history/order-history.component';
 
 @NgModule({
   declarations: [
@@ -17,8 +20,12 @@ import { LayoutComponent } from './Components/Navbar/layout/layout.component';
     HomeComponent,
     CartComponent,
     InvoiceComponent,
-    ProductComponent,
-    LayoutComponent
+    LayoutComponent,
+    ProductListComponent,
+    ProductCardComponent,
+    CartSidebarComponent,
+    OrderHistoryComponent
+
   ],
   imports: [
     BrowserModule,

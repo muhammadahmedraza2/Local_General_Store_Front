@@ -1,0 +1,29 @@
+<!-- ALL PRODUCTS -->
+<button [disabled]="products.length === 0">
+  All Products ({{ products.length }})
+</button>
+
+<hr />
+
+<!-- CATEGORY WISE DISPLAY -->
+<div *ngFor="let cat of categories">
+
+  <!-- CATEGORY TITLE -->
+  <h2 class="category-title">
+    {{ cat }}
+  </h2>
+
+  <hr />
+
+  <!-- PRODUCTS UNDER CATEGORY -->
+  <div class="product-row">
+
+    <app-product-card
+      *ngFor="let p of groupedProducts[cat]"
+      [product]="p"
+      (add)="onAddToCart($event)">
+    </app-product-card>
+
+  </div>
+
+</div>

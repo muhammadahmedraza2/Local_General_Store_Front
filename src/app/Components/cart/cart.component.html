@@ -1,35 +1,15 @@
-<div class="cart-container">
+<h2>🛒 Your Cart</h2>
 
-  <h2>🛒 Your Cart</h2>
+<div *ngIf="cartItems.length === 0">
+  Cart is empty
+</div>
 
-  <div class="cart-item" *ngFor="let item of cartItems">
+<div *ngFor="let item of cartItems" class="cart-item">
 
-    <div class="info">
-      <h4>{{ item.name || '--' }}</h4>
-      <p>Rs {{ item.price || '--' }}</p>
-    </div>
+  <img [src]="item.image" width="60" />
 
-    <div class="qty">
-      <button (click)="decrease(item)">-</button>
-      <span>{{ item.qty }}</span>
-      <button (click)="increase(item)">+</button>
-    </div>
-
-    <div class="total">
-      Rs {{ item.price * item.qty }}
-    </div>
-
-    <button class="remove" (click)="remove(item.id)">✖</button>
-
-  </div>
-
-  <div class="summary">
-    <h3>Total: Rs {{ total }}</h3>
-
-    <a routerLink="/invoice">
-      <button class="checkout">Checkout</button>
-    </a>
-
-  </div>
+<h3>{{ item.productName }}</h3>
+<p>Rs {{ item.price }}</p>
+<p>Qty: {{ item.quantity }}</p>
 
 </div>

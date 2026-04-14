@@ -1,0 +1,23 @@
+.category-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 20px 0 10px;
+}
+
+.product-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 🔥 3 per row */
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .product-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .product-row {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

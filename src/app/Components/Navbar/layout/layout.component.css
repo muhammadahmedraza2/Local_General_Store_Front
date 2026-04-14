@@ -7,8 +7,8 @@
 /* SIDEBAR */
 .sidebar {
   width: 240px;
-  background: linear-gradient(180deg, #1e272e, #2f3640);
-  color: white;
+  background: linear-gradient(180deg, #a8e6cf, #dcedc1); /* 💚 light green */
+  color: #1e272e;
   padding: 20px;
   transition: 0.3s;
   overflow: hidden;
@@ -24,13 +24,14 @@
   font-weight: bold;
   margin-bottom: 20px;
   text-align: center;
+  color: #1e272e;
 }
 
 /* NAV */
 nav a {
   display: block;
   padding: 10px;
-  color: #dcdde1;
+  color: #1e272e;
   text-decoration: none;
   border-radius: 8px;
   margin-bottom: 10px;
@@ -39,12 +40,12 @@ nav a {
 }
 
 nav a:hover {
-  background: #00cec9;
+  background: #81c784; /* 💚 green hover */
   color: white;
 }
 
 .active {
-  background: #00b894;
+  background: #4caf50; 
   color: white;
 }
 
@@ -57,17 +58,18 @@ nav a:hover {
 
 /* TOPBAR */
 .topbar {
-  background: white;
+  background: #e8f5e9; /* 💚 light green background */
   padding: 15px;
   display: flex;
   align-items: center;
   gap: 15px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  color: #1e272e;
 }
 
 /* TOGGLE BUTTON */
 .toggle-btn {
-  background: #2d3436;
+  background: #4caf50; /* 💚 green button */
   color: white;
   border: none;
   padding: 8px 12px;
@@ -76,12 +78,12 @@ nav a:hover {
 }
 
 .toggle-btn:hover {
-  background: #00b894;
+  background: #388e3c;
 }
 
 /* CONTENT */
 .content {
   padding: 20px;
-  background: #f5f6fa;
+  background: #f1f8e9; /* 💚 soft green background */
   flex: 1;
 }
