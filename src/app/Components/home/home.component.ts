@@ -25,12 +25,8 @@ export class HomeComponent implements OnInit {
   }
 
 addToCart(product: any) {
-  this.cartService.addToCart(product).subscribe({
-    next: () => {
-      this.cartService.loadCart();   // 🔥 refresh cart data
-      this.cartService.openSidebar();
-    }
-  });
+  this.cartService.addToCart(product);  // ✅ direct call (no subscribe)
+  this.cartService.openSidebar();
 }
 
 // addToCart(product: any) {

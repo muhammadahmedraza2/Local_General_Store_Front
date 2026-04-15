@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-
-  private api = 'http://localhost:5000/api/Cart';
+  private api = 'http://localhost:5000/api/Orders';
 
   // 🛒 CART STATE
   private cartSubject = new BehaviorSubject<any[]>([]);
@@ -19,41 +18,91 @@ export class CartService {
   sidebar$ = this.sidebarSubject.asObservable();
 
   constructor(private http: HttpClient) {
-    this.loadCart(); // 🔥 app start pe cart load
+    this.loadLocalCart(); // 🔥 localStorage se load
   }
 
-  // 🔄 GET CART FROM API
-  getCart() {
-    return this.http.get<any[]>(this.api);
+  // =========================
+  // 🛒 LOCAL CART METHODS
+  // =========================
+
+  // 📥 LOAD FROM LOCAL STORAGE
+  loadLocalCart() {
+    const saved = localStorage.getItem('cart');
+    if (saved) {
+      this.cartSubject.next(JSON.parse(saved));
+    }
   }
 
-  // 📥 LOAD CART INTO STATE
-  loadCart() {
-    this.getCart().subscribe({
-      next: (res) => this.cartSubject.next(res),
-      error: (err) => console.log(err)
-    });
+  // 💾 SAVE TO LOCAL STORAGE
+  saveCart(cart: any[]) {
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 
-  // ➕ ADD TO CART
+  // ➕ ADD TO CART (NO API)
   addToCart(product: any) {
-    const body = {
-      productId: product.id,
-      productName: product.name,
-      price: product.price,
-      quantity: 1,
-      image: product.image
-    };
+    const cart = this.cartSubject.value;
 
-    return this.http.post(`${this.api}/add`, body);
+    const existing = cart.find(x => x.productId === product.id);
+
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({
+        productId: product.id,
+        productName: product.name,
+        price: product.price,
+        quantity: 1,
+        image: product.image
+      });
+    }
+
+    this.cartSubject.next([...cart]);
+    this.saveCart(cart);
   }
 
-  // ❌ REMOVE ITEM
+  // ➖ REMOVE ITEM
   removeItem(id: number) {
-    return this.http.delete(`${this.api}/${id}`);
+    const updated = this.cartSubject.value.filter(x => x.productId !== id);
+    this.cartSubject.next(updated);
+    this.saveCart(updated);
   }
 
+  // 🔄 CLEAR CART
+  clearCart() {
+    this.cartSubject.next([]);
+    localStorage.removeItem('cart');
+  }
+
+  // =========================
+  // 💳 CHECKOUT (API CALL)
+  // =========================
+
+  // checkout() {
+  //   const cart = this.cartSubject.value;
+  //   // return this.http.post(`${this.api}/checkout`, cart);
+  // }
+
+checkout() {
+  const cart = this.cartSubject.value;
+
+  const order = {
+    orderNumber: 'ORD-' + Date.now(),
+    totalAmount: this.getTotal(),
+    items: cart
+  };
+
+  return this.http.post(this.api, order);
+}
+
+getTotal() {
+  return this.cartSubject.value.reduce((sum, item) =>
+    sum + item.price * item.quantity, 0);
+}
+
+  // =========================
   // 📌 SIDEBAR CONTROL
+  // =========================
+
   openSidebar() {
     this.sidebarSubject.next(true);
   }
@@ -61,15 +110,4 @@ export class CartService {
   closeSidebar() {
     this.sidebarSubject.next(false);
   }
-
-  toggleSidebar(status: boolean) {
-    this.sidebarSubject.next(status);
-  }
-
-clearCart() {
-  this.http.delete(this.api).subscribe(() => {
-    this.cartSubject.next([]);
-  });
-}
-
 }

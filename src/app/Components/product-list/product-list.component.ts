@@ -42,8 +42,7 @@ constructor(
 
 
 onAddToCart(product: Product) {
-  this.cartService.addToCart(product).subscribe(() => {
-    alert('Added to cart');
-  });
+  this.cartService.addToCart(product);   // ✅ direct call
+  alert('Added to cart');
 }
 }

@@ -11,13 +11,10 @@ export class CartComponent implements OnInit {
 
   constructor(private cartService: CartService) {}
 
-ngOnInit() {
-  this.loadCart();
-}
-
-loadCart() {
-  this.cartService.getCart().subscribe(res => {
-    this.cartItems = res;
-  });
-}
+  ngOnInit() {
+    // ✅ Local reactive cart
+    this.cartService.cart$.subscribe((items: any[]) => {
+      this.cartItems = items;
+    });
+  }
 }

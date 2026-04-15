@@ -12,15 +12,14 @@ export class CartSidebarComponent implements OnInit {
   cartItems: any[] = [];
   isOpen: boolean = false;
 
-  // constructor(private cartService: CartService) {}
   constructor(
-  private cartService: CartService,
-  private orderService: OrderService
-) {}
+    private cartService: CartService,
+    private orderService: OrderService
+  ) {}
 
   ngOnInit(): void {
 
-    // 🛒 CART DATA
+    // 🛒 CART DATA (reactive)
     this.cartService.cart$.subscribe((items: any[]) => {
       this.cartItems = items;
     });
@@ -30,8 +29,8 @@ export class CartSidebarComponent implements OnInit {
       this.isOpen = status;
     });
 
-    // 🔄 LOAD INITIAL CART
-    this.cartService.loadCart();
+    // ❌ REMOVE THIS (ab exist nahi karta)
+    // this.cartService.loadCart();
   }
 
   // 💰 SUBTOTAL
@@ -44,18 +43,20 @@ export class CartSidebarComponent implements OnInit {
   // ➕ INCREASE QTY
   increase(item: any) {
     item.quantity++;
+    this.cartService.saveCart(this.cartItems); // 🔥 update localStorage
   }
 
   // ➖ DECREASE QTY
   decrease(item: any) {
     if (item.quantity > 1) {
       item.quantity--;
+      this.cartService.saveCart(this.cartItems); // 🔥 update
     }
   }
 
   // 🗑️ REMOVE ITEM
   remove(item: any) {
-    this.cartItems = this.cartItems.filter(x => x !== item);
+    this.cartService.removeItem(item.productId); // ✅ service use karo
   }
 
   // ❌ CLOSE SIDEBAR
@@ -63,23 +64,26 @@ export class CartSidebarComponent implements OnInit {
     this.cartService.closeSidebar();
   }
 
+  // 💳 CHECKOUT
   checkout() {
-  const order = {
-    orderNumber: 'ORD-' + Date.now(),
-    date: new Date().toDateString(),
-    status: 'Waiting for delivery',
-    total: this.subtotal + 10,
-    items: this.cartItems
-  };
+    const order = {
+      orderNumber: 'ORD-' + Date.now(),
+      date: new Date().toDateString(),
+      status: 'Waiting for delivery',
+      total: this.subtotal + 10,
+      items: this.cartItems
+    };
 
-  this.orderService.placeOrder(order).subscribe({
-    next: () => {
-      alert('Order placed successfully!');
+    this.orderService.placeOrder(order).subscribe({
+      next: () => {
+        alert('Order placed successfully! ✅');
 
-      this.cartService.clearCart();   // empty cart
-      this.cartService.loadCart();     // refresh UI
-      this.close();                    // sidebar close
-    }
-  });
-}
+        this.cartService.clearCart();   // 🧹 clear local cart
+        this.close();                  // sidebar close
+      },
+      error: () => {
+        alert('Something went wrong ❌');
+      }
+    });
+  }
 }
