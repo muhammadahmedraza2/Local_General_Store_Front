@@ -9,13 +9,23 @@ import { OrderService } from 'src/services/order.service';
 export class OrderHistoryComponent implements OnInit {
 
   orders: any[] = [];
+  userId: string | null = '';
 
   constructor(private orderService: OrderService) {}
 
-  ngOnInit() {
-    this.orderService.orders$.subscribe(res => {
-      this.orders = res;
-    });
-  }
+  ngOnInit(): void {
 
+    this.userId = localStorage.getItem('userId');
+
+    if (this.userId) {
+      this.orderService.getOrdersByUser(this.userId).subscribe({
+        next: (res) => {
+          this.orders = res;
+        },
+        error: (err) => {
+          console.error('Error loading orders', err);
+        }
+      });
+    }
+  }
 }

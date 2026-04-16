@@ -7,18 +7,21 @@ import { InvoiceComponent } from './Components/invoice/invoice.component';
 import { ProductCardComponent } from './Components/product-card/product-card.component';
 import { ProductListComponent } from './Components/product-list/product-list.component';
 import { OrderHistoryComponent } from './Components/order-history/order-history.component';
+import { RegistrationComponent } from './Login-Register/registration/registration.component';
+import { LoginComponent } from './Login-Register/login/login.component';
+import { AuthGuard } from 'src/Guard/auth.guard';
 
 const routes: Routes = [
+
+  // ✅ public routes
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegistrationComponent },
 
   {
     path: '',
     component: LayoutComponent,
+    canActivate: [AuthGuard],   // ⭐ PROTECTION
     children: [
-      // { path: '', component: HomeComponent },
-      // { path: 'cart', component: CartComponent },
-      // // { path: 'product', component: ProductCardComponent },
-      // { path: 'product', component: ProductListComponent },
-      // { path: 'invoice', component: InvoiceComponent }
       { path: '', component: HomeComponent },
       { path: 'cart', component: CartComponent },
       { path: 'invoice', component: InvoiceComponent },
@@ -26,7 +29,6 @@ const routes: Routes = [
       { path: 'order-history', component: OrderHistoryComponent },
     ]
   }
-
 ];
 
 @NgModule({

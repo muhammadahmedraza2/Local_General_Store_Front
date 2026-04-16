@@ -2,19 +2,25 @@
 
   <h2>Order History</h2>
 
+  <div *ngIf="orders.length === 0">
+    <p>No orders found 😐</p>
+  </div>
+
   <div class="order-card" *ngFor="let order of orders">
 
     <!-- HEADER -->
     <div class="order-header">
+
       <div>
-        <p class="order-no">Order Number: {{ order.orderNumber }}</p>
-        <p class="date">{{ order.date }}</p>
+        <p class="order-no">Order #: {{ order.orderNumber }}</p>
+        <p class="date">{{ order.date | date:'medium' }}</p>
       </div>
 
       <div class="right">
         <p class="status">{{ order.status }}</p>
         <p class="total">Total: ${{ order.total }}</p>
       </div>
+
     </div>
 
     <!-- ITEMS -->

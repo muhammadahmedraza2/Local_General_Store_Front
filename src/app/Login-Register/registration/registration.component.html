@@ -1,0 +1,34 @@
+<div class="login-container">
+
+  <div class="login-card">
+
+    <h2>Create Account 📝</h2>
+
+    <div class="input-group">
+      <input type="text" [(ngModel)]="name" placeholder="Full Name" />
+    </div>
+
+    <div class="input-group">
+      <input type="text" [(ngModel)]="email" placeholder="Email or Phone" />
+    </div>
+
+    <div class="input-group password-group">
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        [(ngModel)]="password"
+        placeholder="Password"
+      />
+      <span (click)="togglePassword()">
+        {{ showPassword ? '🙈' : '👁️' }}
+      </span>
+    </div>
+
+    <button class="login-btn" (click)="register()">Register</button>
+
+    <p class="footer">
+      Already have an account? <span routerLink="/login">Login</span>
+    </p>
+
+  </div>
+
+</div>

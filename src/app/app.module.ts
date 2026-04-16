@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './Components/home/home.component';
@@ -13,6 +13,9 @@ import { ProductListComponent } from './Components/product-list/product-list.com
 import { ProductCardComponent } from './Components/product-card/product-card.component';
 import { CartSidebarComponent } from './Components/Navbar/cart-sidebar/cart-sidebar.component';
 import { OrderHistoryComponent } from './Components/order-history/order-history.component';
+import { LoginComponent } from './Login-Register/login/login.component';
+import { RegistrationComponent } from './Login-Register/registration/registration.component';
+// import { RegistrationComponent } from './Login-Register/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +27,15 @@ import { OrderHistoryComponent } from './Components/order-history/order-history.
     ProductListComponent,
     ProductCardComponent,
     CartSidebarComponent,
-    OrderHistoryComponent
-
+    OrderHistoryComponent,
+    LoginComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule   // ✅ correct module
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,42 @@
+<div class="login-container">
+
+  <div class="login-card">
+
+    <h2>Welcome Back 👋</h2>
+    <p class="subtitle">Login to your account</p>
+
+    <!-- EMAIL / PHONE -->
+    <div class="input-group">
+      <input type="text" [(ngModel)]="email" placeholder="Email or Phone" />
+    </div>
+
+    <!-- PASSWORD -->
+    <div class="input-group password-group">
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        [(ngModel)]="password"
+        placeholder="Password"
+      />
+
+      <span class="toggle" (click)="togglePassword()">
+        {{ showPassword ? '🙈' : '👁️' }}
+      </span>
+    </div>
+
+    <!-- LOGIN BUTTON -->
+    <button class="login-btn" (click)="login()">Login</button>
+
+    <div class="divider">OR</div>
+
+    <!-- GOOGLE LOGIN -->
+    <button class="google-btn" (click)="loginWithGoogle()">
+      Continue with Google
+    </button>
+
+    <p class="footer">
+      Don't have an account? <span>Register</span>
+    </p>
+
+  </div>
+
+</div>

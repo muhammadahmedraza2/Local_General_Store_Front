@@ -12,23 +12,25 @@ export class OrderService {
   private ordersSubject = new BehaviorSubject<any[]>([]);
   orders$ = this.ordersSubject.asObservable();
 
-  constructor(private http: HttpClient) {
-    this.loadOrders();
-  }
+  constructor(private http: HttpClient) {}
 
-  // 📥 GET from API
+  // 📥 GET Orders (only when needed)
   getOrders() {
     return this.http.get<any[]>(this.api);
   }
 
-  // 🔄 LOAD into state
+  getOrdersByUser(userId: string) {
+  return this.http.get<any[]>(`${this.api}/user/${userId}`);
+}
+
+  // 🔄 Refresh Orders manually
   loadOrders() {
     this.getOrders().subscribe(res => {
       this.ordersSubject.next(res);
     });
   }
 
-  // ➕ PLACE ORDER (checkout)
+  // ➕ POST Order (checkout only)
   placeOrder(order: any) {
     return this.http.post(this.api, order);
   }
