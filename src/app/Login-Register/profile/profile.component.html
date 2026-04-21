@@ -1,0 +1,73 @@
+<div class="profile-page">
+
+  <div class="profile-card">
+
+    <!-- Profile Image -->
+    <div class="avatar-wrapper">
+      <img [src]="imageUrl" class="avatar">
+
+      <label for="uploadImage" class="edit-btn">
+        <i class="bi bi-pencil-fill"></i>
+      </label>
+
+      <input
+        type="file"
+        id="uploadImage"
+        hidden
+        accept="image/*"
+        (change)="onFileChange($event)">
+    </div>
+
+    <!-- Title -->
+    <h2 class="title">Edit Profile</h2>
+
+    <!-- Form -->
+    <div class="form-area">
+
+      <div class="input-group">
+        <label>Full Name</label>
+        <input type="text" [(ngModel)]="name" placeholder="Enter Name">
+      </div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" [(ngModel)]="email" placeholder="Enter Email">
+      </div>
+
+      <div class="input-group">
+        <label>Phone Number</label>
+        <input type="text" placeholder="+92 3000000000">
+      </div>
+
+ <div class="input-group">
+        <label>Role</label>
+        <select [(ngModel)]="role">
+          <option value="User">User</option>
+          <option value="Admin">Admin</option>
+          <option value="Manager">Manager</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label>Date of Birth</label>
+        <input type="date">
+      </div>
+
+      <div class="input-group">
+        <label>Gender</label>
+        <select>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <button class="save-btn" (click)="saveProfile()">
+        Save Changes
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

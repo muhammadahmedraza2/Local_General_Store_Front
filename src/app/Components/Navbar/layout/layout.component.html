@@ -3,40 +3,59 @@
   <!-- SIDEBAR -->
   <aside class="sidebar" [class.collapsed]="isCollapsed">
 
-<div class="logo">
-  <i class="bi bi-cart-fill me-2"></i>
-  {{ isCollapsed ? 'Store' : 'Store Panel' }}
-</div>
-<nav>
-  <a routerLink="/" routerLinkActive="active">
-    <i class="bi bi-house-door-fill"></i>
-    {{ isCollapsed ? '' : 'Home' }}
-  </a>
+    <!-- LOGO -->
+    <div class="logo">
+      <i class="bi bi-cart-fill me-2"></i>
+      {{ isCollapsed ? 'Store' : 'Store Panel' }}
+    </div>
 
-  <a routerLink="/product" routerLinkActive="active">
-    <i class="bi bi-bag-fill"></i>
-    {{ isCollapsed ? '' : 'Product' }}
-  </a>
+    <!-- MENU -->
+    <nav>
 
-  <a routerLink="/invoice" routerLinkActive="active">
-    <i class="bi bi-receipt-cutoff"></i>
-    {{ isCollapsed ? '' : 'Invoice' }}
-  </a>
+      <a routerLink="/" routerLinkActive="active">
+        <i class="bi bi-house-door-fill"></i>
+        {{ isCollapsed ? '' : 'Home' }}
+      </a>
 
-  <a routerLink="/order-history" routerLinkActive="active">
-    <i class="bi bi-clock-history"></i>
-    {{ isCollapsed ? '' : 'Order History' }}
-  </a>
-</nav>
+      <a routerLink="/product" routerLinkActive="active">
+        <i class="bi bi-bag-fill"></i>
+        {{ isCollapsed ? '' : 'Product' }}
+      </a>
+
+      <a routerLink="/invoice" routerLinkActive="active">
+        <i class="bi bi-receipt-cutoff"></i>
+        {{ isCollapsed ? '' : 'Invoice' }}
+      </a>
+
+      <a routerLink="/order-history" routerLinkActive="active">
+        <i class="bi bi-clock-history"></i>
+        {{ isCollapsed ? '' : 'Order History' }}
+      </a>
+
+      <a routerLink="/profile" routerLinkActive="active">
+        <i class="bi bi-person-circle"></i>
+        {{ isCollapsed ? '' : 'Profile' }}
+      </a>
+
+    </nav>
+
+    <!-- LOGOUT BUTTON -->
+    <div class="logout-area">
+
+      <button class="logout-btn" (click)="logout()">
+        <i class="bi bi-box-arrow-right"></i>
+        {{ isCollapsed ? '' : 'Logout' }}
+      </button>
+
+    </div>
 
   </aside>
 
-  <!-- MAIN AREA -->
+  <!-- MAIN -->
   <div class="main">
 
     <header class="topbar">
 
-      <!-- TOGGLE BUTTON -->
       <button class="toggle-btn" (click)="toggleSidebar()">
         ☰
       </button>

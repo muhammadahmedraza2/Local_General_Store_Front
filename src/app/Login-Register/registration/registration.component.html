@@ -12,17 +12,21 @@
       <input type="text" [(ngModel)]="email" placeholder="Email or Phone" />
     </div>
 
-    <div class="input-group password-group">
-      <input
-        [type]="showPassword ? 'text' : 'password'"
-        [(ngModel)]="password"
-        placeholder="Password"
-      />
-      <span (click)="togglePassword()">
-        {{ showPassword ? '🙈' : '👁️' }}
-      </span>
-    </div>
+<div class="input-group password-group">
 
+  <input
+    [type]="showPassword ? 'text' : 'password'"
+    [(ngModel)]="password"
+    placeholder="Password"
+  />
+
+  <span class="toggle" (click)="togglePassword()">
+
+    <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+
+  </span>
+
+</div>
     <button class="login-btn" (click)="register()">Register</button>
 
     <p class="footer">

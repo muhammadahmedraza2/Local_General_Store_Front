@@ -10,6 +10,7 @@ import { OrderHistoryComponent } from './Components/order-history/order-history.
 import { RegistrationComponent } from './Login-Register/registration/registration.component';
 import { LoginComponent } from './Login-Register/login/login.component';
 import { AuthGuard } from 'src/Guard/auth.guard';
+import { ProfileComponent } from './Login-Register/profile/profile.component';
 
 const routes: Routes = [
 
@@ -27,6 +28,7 @@ const routes: Routes = [
       { path: 'invoice', component: InvoiceComponent },
       { path: 'product', component: ProductListComponent },
       { path: 'order-history', component: OrderHistoryComponent },
+      { path: 'profile', component: ProfileComponent },
     ]
   }
 ];

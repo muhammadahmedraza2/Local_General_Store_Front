@@ -15,6 +15,7 @@ import { CartSidebarComponent } from './Components/Navbar/cart-sidebar/cart-side
 import { OrderHistoryComponent } from './Components/order-history/order-history.component';
 import { LoginComponent } from './Login-Register/login/login.component';
 import { RegistrationComponent } from './Login-Register/registration/registration.component';
+import { ProfileComponent } from './Login-Register/profile/profile.component';
 // import { RegistrationComponent } from './Login-Register/registration/registration.component';
 
 @NgModule({
@@ -29,11 +30,13 @@ import { RegistrationComponent } from './Login-Register/registration/registratio
     CartSidebarComponent,
     OrderHistoryComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    // FormsModule,
     FormsModule,
     HttpClientModule
   ],

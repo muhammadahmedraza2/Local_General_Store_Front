@@ -87,3 +87,28 @@ nav a:hover {
   background: #f1f8e9; /* 💚 soft green background */
   flex: 1;
 }
+
+.logout-area{
+  margin-top: auto;
+  padding: 15px;
+}
+
+.logout-btn{
+  width: 100%;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  background: #ff4d4f;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.logout-btn:hover{
+  opacity: 0.9;
+}
+
+.sidebar{
+  display: flex;
+  flex-direction: column;
+}

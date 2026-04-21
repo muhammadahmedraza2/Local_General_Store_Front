@@ -9,41 +9,105 @@ export class AuthService {
 
   private api = 'http://localhost:5000/api/Auth';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
-  // 🔐 LOGIN
+  // ==========================
+  // LOGIN
+  // ==========================
   login(data: any) {
     return this.http.post<any>(`${this.api}/login`, data);
   }
 
-  setToken(token: string) {
-    localStorage.setItem('token', token);
-  }
-
-  // 📝 REGISTER
+  // ==========================
+  // REGISTER
+  // ==========================
   register(data: any) {
-    return this.http.post(`${this.api}/register`, data);
+    return this.http.post<any>(`${this.api}/register`, data);
   }
 
-  // 💾 SAVE TOKEN
+  // ==========================
+  // GOOGLE LOGIN
+  // ==========================
+  googleLogin(token: string) {
+    return this.http.post<any>(`${this.api}/google-login`, {
+      token: token
+    });
+  }
+
+  // ==========================
+  // UPDATE PROFILE API (NEW)
+  // ==========================
+  updateProfile(data: any) {
+    return this.http.put<any>(`${this.api}/update-profile`, data);
+  }
+
+
+  // ==========================
+  // SAVE USER (IMPORTANT)
+  // ==========================
   saveUser(res: any) {
     localStorage.setItem('token', res.token);
     localStorage.setItem('userId', res.userId);
+    localStorage.setItem('name', res.name);
+    localStorage.setItem('email', res.email);
+
+    // ✅ ROLE SAVE
+    localStorage.setItem('role', res.role);
   }
 
-  // 🔍 CHECK LOGIN
+  // ==========================
+  // GET TOKEN
+  // ==========================
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  // ==========================
+  // CHECK LOGIN
+  // ==========================
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
 
-  // 🚪 LOGOUT
+  // ==========================
+  // GET USER DATA
+  // ==========================
+  getUserId(): string | null {
+    return localStorage.getItem('userId');
+  }
+
+  getUserName(): string | null {
+    return localStorage.getItem('name');
+  }
+
+  getEmail(): string | null {
+    return localStorage.getItem('email');
+  }
+
+  getRole(): string | null {
+    return localStorage.getItem('role');
+  }
+
+  // ==========================
+  // GET FULL PROFILE
+  // ==========================
+  getProfile() {
+    return {
+      userId: this.getUserId(),
+      name: this.getUserName(),
+      email: this.getEmail(),
+      role: this.getRole()
+    };
+  }
+
+  // ==========================
+  // LOGOUT
+  // ==========================
   logout() {
     localStorage.clear();
     this.router.navigate(['/login']);
-  }
-
-  // 👤 GET USER ID
-  getUserId() {
-    return localStorage.getItem('userId');
   }
 }

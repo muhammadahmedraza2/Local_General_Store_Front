@@ -11,17 +11,21 @@
     </div>
 
     <!-- PASSWORD -->
-    <div class="input-group password-group">
-      <input
-        [type]="showPassword ? 'text' : 'password'"
-        [(ngModel)]="password"
-        placeholder="Password"
-      />
+<div class="input-group password-group">
 
-      <span class="toggle" (click)="togglePassword()">
-        {{ showPassword ? '🙈' : '👁️' }}
-      </span>
-    </div>
+  <input
+    [type]="showPassword ? 'text' : 'password'"
+    [(ngModel)]="password"
+    placeholder="Password"
+  />
+
+  <span class="toggle" (click)="togglePassword()">
+
+    <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+
+  </span>
+
+</div>
 
     <!-- LOGIN BUTTON -->
     <button class="login-btn" (click)="login()">Login</button>
@@ -29,12 +33,14 @@
     <div class="divider">OR</div>
 
     <!-- GOOGLE LOGIN -->
-    <button class="google-btn" (click)="loginWithGoogle()">
+    <!-- <button class="google-btn" (click)="loginWithGoogle()"> -->
+
+<button  class="google-btn" (click)="loginWithGoogle()">
       Continue with Google
     </button>
 
     <p class="footer">
-      Don't have an account? <span>Register</span>
+      Don't have an account? <span routerLink="/register">Register</span>
     </p>
 
   </div>
