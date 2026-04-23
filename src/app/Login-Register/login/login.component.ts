@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/services/auth.service';
 import { Router } from '@angular/router';
 
@@ -15,23 +14,22 @@ export class LoginComponent implements OnInit {
   email = '';
   password = '';
   showPassword = false;
-
-  private googleInitialized = false;
+  googleInitialized = false;
 
   constructor(
-    private http: HttpClient,
     private auth: AuthService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.initGoogle();
+    this.initGoogleLogin();
   }
 
   togglePassword() {
     this.showPassword = !this.showPassword;
   }
 
+  // NORMAL LOGIN
   login() {
     const body = {
       email: this.email,
@@ -39,48 +37,49 @@ export class LoginComponent implements OnInit {
     };
 
     this.auth.login(body).subscribe({
-      next: (res) => {
+      next: (res: any) => {
         this.auth.saveUser(res);
-        alert('Login successful ✅');
         this.router.navigate(['/']);
       },
-      error: () => alert('Login failed ❌')
+      error: () => alert('Login Failed')
     });
   }
 
-  // ✅ INIT ONLY ONCE
-  private initGoogle() {
+  // GOOGLE INIT
+  initGoogleLogin() {
+
     if (this.googleInitialized) return;
 
     google.accounts.id.initialize({
       client_id: '437392906208-qdrn7doutvvsmieavh2e0q96jnpqr4kg.apps.googleusercontent.com',
       callback: (response: any) => {
-        this.handleGoogleLogin(response);
-      }
+        this.handleGoogleResponse(response);
+      },
+      auto_select: true,
+      cancel_on_tap_outside: false
     });
 
     this.googleInitialized = true;
   }
 
-  // ✅ BUTTON CLICK ONLY
+  // BUTTON CLICK
   loginWithGoogle() {
     google.accounts.id.prompt();
   }
 
-  // ✅ HANDLE TOKEN
-  private handleGoogleLogin(response: any) {
-    console.log('Google Credential:', response.credential);
+  // TOKEN HANDLE
+  handleGoogleResponse(response: any) {
 
     this.auth.googleLogin(response.credential).subscribe({
       next: (res: any) => {
         this.auth.saveUser(res);
-        alert('Google Login Success ✅');
         this.router.navigate(['/']);
       },
-      error: (err) => {
-        console.log(err);
-        alert('Google Login Failed ❌');
+      error: () => {
+        alert('Google Login Failed');
       }
     });
+
   }
+
 }

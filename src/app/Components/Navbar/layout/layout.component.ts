@@ -8,15 +8,16 @@ import { AuthService } from 'src/services/auth.service';
 })
 export class LayoutComponent {
 
-  constructor (private auth:AuthService){}
   isCollapsed = false;
+
+  constructor(private auth: AuthService) {}
 
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
   }
 
-
   logout() {
     this.auth.logout();
   }
+
 }
