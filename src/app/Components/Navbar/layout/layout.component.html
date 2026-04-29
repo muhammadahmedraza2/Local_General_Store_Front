@@ -1,69 +1,109 @@
 <div class="layout">
 
-  <!-- SIDEBAR -->
+  <!-- Sidebar -->
   <aside class="sidebar" [class.collapsed]="isCollapsed">
 
-    <!-- LOGO -->
-    <div class="logo">
-      <i class="bi bi-cart-fill me-2"></i>
-      {{ isCollapsed ? 'Store' : 'Store Panel' }}
+    <!-- Logo -->
+    <div class="logo-section">
+      <div class="logo-icon">
+        <i class="bi bi-cart-fill"></i>
+      </div>
+
+      <div class="logo-text" *ngIf="!isCollapsed">
+        <h4>Store Panel</h4>
+        <small>User Dashboard</small>
+      </div>
     </div>
 
-    <!-- MENU -->
-    <nav>
+    <!-- User Info (DYNAMIC IMAGE) -->
+<div class="user-box" *ngIf="!isCollapsed && user">
 
-      <a routerLink="/" routerLinkActive="active">
+  <img 
+    [src]="user?.imageUrl 
+      ? 'http://localhost:5000/Uploads/' + user.imageUrl 
+      : 'https://i.pravatar.cc/100'" 
+    alt="user">
+
+  <h6>{{ user?.name || 'User' }}</h6>
+  <span>{{ user?.role || 'User' }}</span>
+
+</div>
+
+    <!-- Menu -->
+    <nav class="menu">
+
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
         <i class="bi bi-house-door-fill"></i>
-        {{ isCollapsed ? '' : 'Home' }}
+        <span *ngIf="!isCollapsed">Home</span>
       </a>
 
       <a routerLink="/product" routerLinkActive="active">
         <i class="bi bi-bag-fill"></i>
-        {{ isCollapsed ? '' : 'Product' }}
+        <span *ngIf="!isCollapsed">Products</span>
+      </a>
+
+      <a routerLink="/cart" routerLinkActive="active">
+        <i class="bi bi-cart3"></i>
+        <span *ngIf="!isCollapsed">Cart</span>
       </a>
 
       <a routerLink="/invoice" routerLinkActive="active">
         <i class="bi bi-receipt-cutoff"></i>
-        {{ isCollapsed ? '' : 'Invoice' }}
+        <span *ngIf="!isCollapsed">Invoice</span>
       </a>
 
       <a routerLink="/order-history" routerLinkActive="active">
         <i class="bi bi-clock-history"></i>
-        {{ isCollapsed ? '' : 'Order History' }}
+        <span *ngIf="!isCollapsed">Orders</span>
       </a>
 
       <a routerLink="/profile" routerLinkActive="active">
         <i class="bi bi-person-circle"></i>
-        {{ isCollapsed ? '' : 'Profile' }}
+        <span *ngIf="!isCollapsed">Profile</span>
       </a>
 
     </nav>
 
-    <!-- LOGOUT BUTTON -->
+    <!-- Logout -->
     <div class="logout-area">
-
       <button class="logout-btn" (click)="logout()">
         <i class="bi bi-box-arrow-right"></i>
-        {{ isCollapsed ? '' : 'Logout' }}
+        <span *ngIf="!isCollapsed">Logout</span>
       </button>
-
     </div>
 
   </aside>
 
-  <!-- MAIN -->
+  <!-- Main -->
   <div class="main">
 
+    <!-- Topbar -->
     <header class="topbar">
 
-      <button class="toggle-btn" (click)="toggleSidebar()">
-        ☰
-      </button>
+      <div class="left-top">
+        <button class="toggle-btn" (click)="toggleSidebar()">
+          <i class="bi bi-list"></i>
+        </button>
 
-      <h3>Local General Store System</h3>
+        <h3>Local General Store</h3>
+      </div>
+
+      <div class="right-top">
+
+        <i class="bi bi-bell-fill notify"></i>
+
+        <!-- TOPBAR IMAGE -->
+        <img 
+          [src]="user?.imageUrl 
+            ? 'http://localhost:5000/Uploads/' + user.imageUrl 
+            : 'https://i.pravatar.cc/50'" 
+          alt="user">
+
+      </div>
 
     </header>
 
+    <!-- Content -->
     <div class="content">
       <router-outlet></router-outlet>
     </div>

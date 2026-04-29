@@ -9,32 +9,66 @@ import { AuthService } from 'src/services/auth.service';
 })
 export class RegistrationComponent {
 
-  name = '';
-  email = '';
-  password = '';
-  showPassword = false;
+  name: string = '';
+  email: string = '';
+  password: string = '';
+  phone: string = '';
+  dateOfBirth: string = '';
+  gender: string = '';
 
-  constructor(private auth: AuthService, private router: Router) {}
+  showPassword: boolean = false;
+
+  selectedFile: File | null = null;
+
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
   togglePassword() {
     this.showPassword = !this.showPassword;
   }
 
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    }
+  }
+
   register() {
 
-    const body = {
-      name: this.name,
-      email: this.email,
-      password: this.password
-    };
+    // ======================
+    // BASIC VALIDATION (IMPORTANT)
+    // ======================
+    if (!this.name || !this.email || !this.password) {
+      alert('Name, Email, Password required');
+      return;
+    }
 
-    this.auth.register(body).subscribe({
-      next: () => {
-        alert('Registered successfully ✅');
+    const formData = new FormData();
+
+    formData.append('name', this.name.trim());
+    formData.append('email', this.email.trim());
+    formData.append('password', this.password);
+    formData.append('phone', this.phone || '');
+    formData.append('dateOfBirth', this.dateOfBirth || '');
+    formData.append('gender', this.gender || '');
+
+    if (this.selectedFile) {
+      formData.append('profileImage', this.selectedFile);
+    }
+
+    this.auth.register(formData).subscribe({
+      next: (res) => {
+        console.log(res);
+        alert('Registered Successfully');
         this.router.navigate(['/login']);
       },
-      error: () => {
-        alert('Registration failed ❌');
+      error: (err) => {
+        console.log('API ERROR:', err);
+        alert(err.error || 'Registration Failed');
       }
     });
   }

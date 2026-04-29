@@ -16,6 +16,7 @@ import { OrderHistoryComponent } from './Components/order-history/order-history.
 import { LoginComponent } from './Login-Register/login/login.component';
 import { RegistrationComponent } from './Login-Register/registration/registration.component';
 import { ProfileComponent } from './Login-Register/profile/profile.component';
+import { NotFoundComponent } from './NotFounded/not-found/not-found.component';
 // import { RegistrationComponent } from './Login-Register/registration/registration.component';
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ProfileComponent } from './Login-Register/profile/profile.component';
     OrderHistoryComponent,
     LoginComponent,
     RegistrationComponent,
-    ProfileComponent
+    ProfileComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

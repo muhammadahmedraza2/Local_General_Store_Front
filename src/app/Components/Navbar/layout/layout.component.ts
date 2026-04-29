@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/services/auth.service';
 
 @Component({
@@ -6,11 +6,16 @@ import { AuthService } from 'src/services/auth.service';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css']
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
 
   isCollapsed = false;
+  user: any = {};
 
   constructor(private auth: AuthService) {}
+
+  ngOnInit(): void {
+    this.user = this.auth.getUser();
+  }
 
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
@@ -19,5 +24,4 @@ export class LayoutComponent {
   logout() {
     this.auth.logout();
   }
-
 }

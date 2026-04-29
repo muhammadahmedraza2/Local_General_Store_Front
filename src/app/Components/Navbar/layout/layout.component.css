@@ -1,114 +1,203 @@
-.layout {
-  display: flex;
-  height: 100vh;
-  font-family: Arial, sans-serif;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-/* SIDEBAR */
-.sidebar {
-  width: 240px;
-  background: linear-gradient(180deg, #a8e6cf, #dcedc1); /* 💚 light green */
-  color: #1e272e;
-  padding: 20px;
-  transition: 0.3s;
-  overflow: hidden;
+body{
+  font-family:Segoe UI, sans-serif;
 }
 
-.sidebar.collapsed {
-  width: 70px;
+.layout{
+  display:flex;
+  min-height:100vh;
 }
 
-/* LOGO */
-.logo {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-align: center;
-  color: #1e272e;
+/* Sidebar */
+
+.sidebar{
+  width:270px;
+  background:linear-gradient(180deg,#1e293b,#0f172a);
+  color:#fff;
+  padding:20px 15px;
+  transition:.3s;
+  display:flex;
+  flex-direction:column;
 }
 
-/* NAV */
-nav a {
-  display: block;
-  padding: 10px;
-  color: #1e272e;
-  text-decoration: none;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  transition: 0.3s;
-  white-space: nowrap;
+.sidebar.collapsed{
+  width:90px;
 }
 
-nav a:hover {
-  background: #81c784; /* 💚 green hover */
-  color: white;
+.logo-section{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:25px;
 }
 
-.active {
-  background: #4caf50; 
-  color: white;
+.logo-icon{
+  width:45px;
+  height:45px;
+  background:#22c55e;
+  border-radius:12px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:22px;
 }
 
-/* MAIN */
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+.logo-text h4{
+  margin:0;
+  font-size:18px;
 }
 
-/* TOPBAR */
-.topbar {
-  background: #e8f5e9; /* 💚 light green background */
-  padding: 15px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  color: #1e272e;
+.logo-text small{
+  color:#cbd5e1;
 }
 
-/* TOGGLE BUTTON */
-.toggle-btn {
-  background: #4caf50; /* 💚 green button */
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
+.user-box{
+  text-align:center;
+  padding:20px;
+  background:rgba(255,255,255,.08);
+  border-radius:16px;
+  margin-bottom:25px;
 }
 
-.toggle-btn:hover {
-  background: #388e3c;
+.user-box img{
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  margin-bottom:10px;
 }
 
-/* CONTENT */
-.content {
-  padding: 20px;
-  background: #f1f8e9; /* 💚 soft green background */
-  flex: 1;
+.user-box h6{
+  margin:0;
 }
+
+.user-box span{
+  font-size:13px;
+  color:#cbd5e1;
+}
+
+/* Menu */
+
+.menu{
+  flex:1;
+}
+
+.menu a{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  text-decoration:none;
+  color:#fff;
+  padding:14px 16px;
+  border-radius:12px;
+  margin-bottom:10px;
+  transition:.3s;
+}
+
+.menu a i{
+  font-size:18px;
+}
+
+.menu a:hover{
+  background:rgba(255,255,255,.08);
+}
+
+.menu a.active{
+  background:#22c55e;
+}
+
+/* Logout */
 
 .logout-area{
-  margin-top: auto;
-  padding: 15px;
+  margin-top:auto;
 }
 
 .logout-btn{
-  width: 100%;
-  border: none;
-  padding: 12px;
-  border-radius: 10px;
-  background: #ff4d4f;
-  color: white;
-  cursor: pointer;
-  font-weight: 600;
+  width:100%;
+  border:none;
+  background:#ef4444;
+  color:#fff;
+  padding:13px;
+  border-radius:12px;
+  cursor:pointer;
+  transition:.3s;
 }
 
 .logout-btn:hover{
-  opacity: 0.9;
+  background:#dc2626;
 }
 
-.sidebar{
-  display: flex;
-  flex-direction: column;
+/* Main */
+
+.main{
+  flex:1;
+  background:#f8fafc;
+}
+
+.topbar{
+  height:70px;
+  background:#fff;
+  padding:0 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+
+.left-top{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.toggle-btn{
+  border:none;
+  background:#22c55e;
+  color:#fff;
+  width:40px;
+  height:40px;
+  border-radius:10px;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.right-top{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.notify{
+  font-size:20px;
+  cursor:pointer;
+}
+
+.right-top img{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+}
+
+.content{
+  padding:25px;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+  .sidebar{
+    position:fixed;
+    z-index:999;
+    height:100%;
+  }
+
+  .main{
+    margin-left:90px;
+  }
+
 }

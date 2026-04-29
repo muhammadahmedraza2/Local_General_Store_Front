@@ -9,28 +9,47 @@
     </div>
 
     <div class="input-group">
-      <input type="text" [(ngModel)]="email" placeholder="Email or Phone" />
+      <input type="text" [(ngModel)]="email" placeholder="Email" />
     </div>
 
-<div class="input-group password-group">
+    <div class="input-group password-group">
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        [(ngModel)]="password"
+        placeholder="Password"
+      />
+      <span class="toggle" (click)="togglePassword()">
+        <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+      </span>
+    </div>
 
-  <input
-    [type]="showPassword ? 'text' : 'password'"
-    [(ngModel)]="password"
-    placeholder="Password"
-  />
+    <div class="input-group">
+      <input type="text" [(ngModel)]="phone" placeholder="Phone" />
+    </div>
 
-  <span class="toggle" (click)="togglePassword()">
+    <div class="input-group">
+      <input type="date" [(ngModel)]="dateOfBirth" />
+    </div>
 
-    <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+    <div class="input-group">
+      <select [(ngModel)]="gender">
+        <option value="">Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </div>
 
-  </span>
+    <div class="input-group">
+      <input type="file" (change)="onFileSelected($event)" />
+    </div>
 
-</div>
-    <button class="login-btn" (click)="register()">Register</button>
+    <button class="login-btn" (click)="register()">
+      Register
+    </button>
 
     <p class="footer">
-      Already have an account? <span routerLink="/login">Login</span>
+      Already have an account?
+      <span routerLink="/login">Login</span>
     </p>
 
   </div>

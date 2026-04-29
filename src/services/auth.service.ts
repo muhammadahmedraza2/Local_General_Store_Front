@@ -14,98 +14,54 @@ export class AuthService {
     private router: Router
   ) {}
 
-  // ==========================
-  // LOGIN
-  // ==========================
   login(data: any) {
     return this.http.post<any>(`${this.api}/login`, data);
   }
 
-  // ==========================
-  // REGISTER
-  // ==========================
-  register(data: any) {
+  register(data: FormData) {
     return this.http.post<any>(`${this.api}/register`, data);
   }
 
-  // ==========================
-  // GOOGLE LOGIN
-  // ==========================
   googleLogin(token: string) {
-    return this.http.post<any>(`${this.api}/google-login`, {
-      token: token
-    });
+    return this.http.post<any>(`${this.api}/google-login`, { token });
   }
 
-  // ==========================
-  // UPDATE PROFILE API (NEW)
-  // ==========================
   updateProfile(data: any) {
     return this.http.put<any>(`${this.api}/update-profile`, data);
   }
 
-
   // ==========================
-  // SAVE USER (IMPORTANT)
+  // SAVE USER (IMPORTANT FIX)
   // ==========================
   saveUser(res: any) {
     localStorage.setItem('token', res.token);
-    localStorage.setItem('userId', res.userId);
-    localStorage.setItem('name', res.name);
-    localStorage.setItem('email', res.email);
 
-    // ✅ ROLE SAVE
-    localStorage.setItem('role', res.role);
+    const user = {
+      userId: res.userId,
+      name: res.name,
+      email: res.email,
+      role: res.role,
+      imageUrl: res.imageUrl || null
+    };
+
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
   // ==========================
-  // GET TOKEN
+  // GET USER
   // ==========================
+  getUser() {
+    return JSON.parse(localStorage.getItem('user') || '{}');
+  }
+
   getToken(): string | null {
     return localStorage.getItem('token');
   }
 
-  // ==========================
-  // CHECK LOGIN
-  // ==========================
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
 
-  // ==========================
-  // GET USER DATA
-  // ==========================
-  getUserId(): string | null {
-    return localStorage.getItem('userId');
-  }
-
-  getUserName(): string | null {
-    return localStorage.getItem('name');
-  }
-
-  getEmail(): string | null {
-    return localStorage.getItem('email');
-  }
-
-  getRole(): string | null {
-    return localStorage.getItem('role');
-  }
-
-  // ==========================
-  // GET FULL PROFILE
-  // ==========================
-  getProfile() {
-    return {
-      userId: this.getUserId(),
-      name: this.getUserName(),
-      email: this.getEmail(),
-      role: this.getRole()
-    };
-  }
-
-  // ==========================
-  // LOGOUT
-  // ==========================
   logout() {
     localStorage.clear();
     this.router.navigate(['/login']);
