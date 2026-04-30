@@ -17,6 +17,7 @@ import { LoginComponent } from './Login-Register/login/login.component';
 import { RegistrationComponent } from './Login-Register/registration/registration.component';
 import { ProfileComponent } from './Login-Register/profile/profile.component';
 import { NotFoundComponent } from './NotFounded/not-found/not-found.component';
+import { CategoryComponent } from './Components/category/category.component';
 // import { RegistrationComponent } from './Login-Register/registration/registration.component';
 
 @NgModule({
@@ -33,14 +34,14 @@ import { NotFoundComponent } from './NotFounded/not-found/not-found.component';
     LoginComponent,
     RegistrationComponent,
     ProfileComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    // FormsModule,
-    FormsModule,
+  FormsModule,
     HttpClientModule
   ],
   providers: [],

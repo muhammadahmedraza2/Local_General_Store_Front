@@ -23,7 +23,7 @@ export class RegistrationComponent {
   constructor(
     private auth: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   togglePassword() {
     this.showPassword = !this.showPassword;
@@ -63,6 +63,7 @@ export class RegistrationComponent {
     this.auth.register(formData).subscribe({
       next: (res) => {
         console.log(res);
+        this.auth.saveUser(res); // ✅ YEH ADD KARO — user save hoga
         alert('Registered Successfully');
         this.router.navigate(['/login']);
       },

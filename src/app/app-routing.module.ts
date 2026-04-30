@@ -14,6 +14,7 @@ import { ProfileComponent } from './Login-Register/profile/profile.component';
 
 import { AuthGuard } from 'src/Guard/auth.guard';
 import { NotFoundComponent } from './NotFounded/not-found/not-found.component';
+import { CategoryComponent } from './Components/category/category.component';
 
 const routes: Routes = [
 
@@ -32,7 +33,8 @@ const routes: Routes = [
       { path: 'invoice', component: InvoiceComponent },
       { path: 'product', component: ProductListComponent },
       { path: 'order-history', component: OrderHistoryComponent },
-      { path: 'profile', component: ProfileComponent }
+      { path: 'profile', component: ProfileComponent },
+      { path: 'category', component: CategoryComponent }
     ]
   },
 

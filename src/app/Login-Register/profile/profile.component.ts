@@ -26,69 +26,78 @@ export class ProfileComponent implements OnInit {
   // ==========================
   // LOAD DATA ON START
   // ==========================
-  ngOnInit(): void {
-    this.name = localStorage.getItem('name') || '';
-    this.email = localStorage.getItem('email') || '';
-    this.role = localStorage.getItem('role') || 'User';
-  }
+ngOnInit(): void {
+  const user = this.auth.getUser();
+
+  this.name = user.name || '';
+  this.email = user.email || '';
+  this.role = user.role || 'User';
+  this.phoneNumber = user.phoneNumber || '';
+  this.dob = user.dateOfBirth || '';
+  this.gender = user.gender || 'Male';
+
+  this.imageUrl =
+    user.imageUrl ||
+    'https://cdn-icons-png.flaticon.com/512/3135/3135715.png';
+}
 
   // ==========================
   // IMAGE UPLOAD
   // ==========================
-  onFileChange(event: any) {
-    const file = event.target.files[0];
+onFileChange(event: any) {
+  const file = event.target.files[0];
 
-    if (file) {
-      const reader = new FileReader();
+  if (file) {
+    const reader = new FileReader();
 
-      reader.onload = () => {
-        this.imageUrl = reader.result as string;
-        localStorage.setItem('image', this.imageUrl);
-      };
+    reader.onload = () => {
+      this.imageUrl = reader.result as string;
 
-      reader.readAsDataURL(file);
-    }
+      const user = this.auth.getUser();
+      user.imageUrl = this.imageUrl;
+
+      localStorage.setItem('user', JSON.stringify(user));
+    };
+
+    reader.readAsDataURL(file);
   }
-
+}
   // ==========================
   // SAVE PROFILE (API CALL)
   // ==========================
-  saveProfile() {
+saveProfile() {
 
-    const payload = {
-      name: this.name,
-      email: this.email,
-      role: this.role,
-      phoneNumber: this.phoneNumber,
-      dateOfBirth: this.dob,
-      gender: this.gender,
-      imageUrl: this.imageUrl
-    };
+  const payload = {
+    name: this.name,
+    email: this.email,
+    role: this.role,
+    phoneNumber: this.phoneNumber,
+    dateOfBirth: this.dob,
+    gender: this.gender,
+    imageUrl: this.imageUrl
+  };
 
-    console.log('Sending Payload:', payload);
-
-    this.auth.updateProfile(payload)
-  .subscribe({
+  this.auth.updateProfile(payload).subscribe({
     next: (res: any) => {
-      console.log('Profile updated successfully', res);
 
-      // update localStorage
-      localStorage.setItem('name', this.name);
-      localStorage.setItem('email', this.email);
-      localStorage.setItem('role', this.role);
+      const user = this.auth.getUser();
+
+      const updatedUser = {
+        ...user,
+        ...payload
+      };
+
+      localStorage.setItem('user', JSON.stringify(updatedUser));
 
       alert('Profile Updated Successfully ✅');
     },
     error: (err) => {
-      console.error('FULL ERROR:', err);
-
-      // IMPORTANT: show backend message
-      if (err.error) {
-        console.log('Backend Error:', err.error);
-      }
-
-      alert(err.error?.message || 'Something went wrong ❌');
+      console.log(err);
+      alert(err.error?.message || 'Error updating profile ❌');
     }
   });
-  }
+}
+
+
+
 }

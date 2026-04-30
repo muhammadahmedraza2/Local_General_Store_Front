@@ -1,8 +1,6 @@
 <div class="layout">
-
   <!-- Sidebar -->
   <aside class="sidebar" [class.collapsed]="isCollapsed">
-
     <!-- Logo -->
     <div class="logo-section">
       <div class="logo-icon">
@@ -16,23 +14,27 @@
     </div>
 
     <!-- User Info (DYNAMIC IMAGE) -->
-<div class="user-box" *ngIf="!isCollapsed && user">
+    <div class="user-box" *ngIf="!isCollapsed && user">
+      <img
+        [src]="
+          user?.imageUrl
+            ? 'http://localhost:5000/Uploads/' + user.imageUrl
+            : 'assets/default-avatar.png'
+        "
+        alt="user"
+      />
 
-  <img 
-    [src]="user?.imageUrl 
-      ? 'http://localhost:5000/Uploads/' + user.imageUrl 
-      : 'https://i.pravatar.cc/100'" 
-    alt="user">
-
-  <h6>{{ user?.name || 'User' }}</h6>
-  <span>{{ user?.role || 'User' }}</span>
-
-</div>
+      <h6>{{ user?.name || "User" }}</h6>
+      <span>{{ user?.role || "User" }}</span>
+    </div>
 
     <!-- Menu -->
     <nav class="menu">
-
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
         <i class="bi bi-house-door-fill"></i>
         <span *ngIf="!isCollapsed">Home</span>
       </a>
@@ -57,11 +59,15 @@
         <span *ngIf="!isCollapsed">Orders</span>
       </a>
 
+      <a routerLink="/category" routerLinkActive="active">
+        <i class="bi bi-grid-fill"></i>
+        <span *ngIf="!isCollapsed">Category</span>
+      </a>
+
       <a routerLink="/profile" routerLinkActive="active">
         <i class="bi bi-person-circle"></i>
         <span *ngIf="!isCollapsed">Profile</span>
       </a>
-
     </nav>
 
     <!-- Logout -->
@@ -71,15 +77,12 @@
         <span *ngIf="!isCollapsed">Logout</span>
       </button>
     </div>
-
   </aside>
 
   <!-- Main -->
   <div class="main">
-
     <!-- Topbar -->
     <header class="topbar">
-
       <div class="left-top">
         <button class="toggle-btn" (click)="toggleSidebar()">
           <i class="bi bi-list"></i>
@@ -89,25 +92,23 @@
       </div>
 
       <div class="right-top">
-
         <i class="bi bi-bell-fill notify"></i>
 
         <!-- TOPBAR IMAGE -->
-        <img 
-          [src]="user?.imageUrl 
-            ? 'http://localhost:5000/Uploads/' + user.imageUrl 
-            : 'https://i.pravatar.cc/50'" 
-          alt="user">
-
+        <img
+          [src]="
+            user?.imageUrl
+              ? 'http://localhost:5000/Uploads/' + user.imageUrl
+              : 'assets/default-avatar.png'
+          "
+          alt="user"
+        />
       </div>
-
     </header>
 
     <!-- Content -->
     <div class="content">
       <router-outlet></router-outlet>
     </div>
-
   </div>
-
 </div>

@@ -33,19 +33,58 @@ export class AuthService {
   // ==========================
   // SAVE USER (IMPORTANT FIX)
   // ==========================
-  saveUser(res: any) {
-    localStorage.setItem('token', res.token);
 
-    const user = {
-      userId: res.userId,
-      name: res.name,
-      email: res.email,
-      role: res.role,
-      imageUrl: res.imageUrl || null
-    };
+// saveUser(res: any) {
+//   localStorage.setItem('token', res.token);
 
-    localStorage.setItem('user', JSON.stringify(user));
-  }
+//   // ✅ res.user ke andar se lo (register response)
+//   // ✅ ya directly res se lo (login response)
+//   const userData = res.user || res;
+
+//   const user = {
+//     userId: userData.id || userData.userId,
+//     name: userData.name,
+//     email: userData.email,
+//     role: userData.role,
+//     imageUrl: userData.imageUrl || null   // ✅ ab sahi se milega
+//   };
+
+//   localStorage.setItem('user', JSON.stringify(user));
+// }
+
+
+saveUser(res: any) {
+  localStorage.setItem('token', res.token);
+
+  const userData = res.user || res;
+
+  const user = {
+    userId: userData.id || userData.userId,
+    name: userData.name,
+    email: userData.email,
+    role: userData.role,
+    phoneNumber: userData.phoneNumber || '',
+    dateOfBirth: userData.dateOfBirth || '',
+    gender: userData.gender || '',
+    imageUrl: userData.imageUrl || null
+  };
+
+  localStorage.setItem('user', JSON.stringify(user));
+}
+
+// saveUser(res: any) {
+  //   localStorage.setItem('token', res.token);
+
+  //   const user = {
+  //     userId: res.userId,
+  //     name: res.name,
+  //     email: res.email,
+  //     role: res.role,
+  //     imageUrl: res.imageUrl || null
+  //   };
+
+  //   localStorage.setItem('user', JSON.stringify(user));
+  // }
 
   // ==========================
   // GET USER
