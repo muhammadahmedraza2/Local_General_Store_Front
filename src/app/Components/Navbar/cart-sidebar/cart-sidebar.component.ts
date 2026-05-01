@@ -7,104 +7,104 @@ import { OrderService } from 'src/services/order.service';
   templateUrl: './cart-sidebar.component.html',
   styleUrls: ['./cart-sidebar.component.css']
 })
-export class CartSidebarComponent implements OnInit {
+export class CartSidebarComponent  {
 
-  cartItems: any[] = [];
-  isOpen = false;
+//   cartItems: any[] = [];
+//   isOpen = false;
 
-  constructor(
-    private cartService: CartService,
-    private orderService: OrderService
-  ) {}
+//   constructor(
+//     private cartService: CartService,
+//     private orderService: OrderService
+//   ) {}
 
-  ngOnInit(): void {
+//   ngOnInit(): void {
 
-    // 🛒 cart stream
-    this.cartService.cart$.subscribe(items => {
-      this.cartItems = items;
-    });
+//     // 🛒 cart stream
+//     this.cartService.cart$.subscribe(items => {
+//       this.cartItems = items;
+//     });
 
-    // 📌 sidebar state
-    this.cartService.sidebar$.subscribe(status => {
-      this.isOpen = status;
-    });
-  }
+//     // 📌 sidebar state
+//     this.cartService.sidebar$.subscribe(status => {
+//       this.isOpen = status;
+//     });
+//   }
 
-  // 💰 subtotal
-  get subtotal(): number {
-    return this.cartItems.reduce((sum, item) =>
-      sum + item.price * item.quantity, 0);
-  }
+//   // 💰 subtotal
+//   get subtotal(): number {
+//     return this.cartItems.reduce((sum, item) =>
+//       sum + item.price * item.quantity, 0);
+//   }
 
-  // ➕ increase
-  increase(item: any) {
-    item.quantity++;
-    this.cartService.saveCart(this.cartItems);
-  }
+//   // ➕ increase
+//   increase(item: any) {
+//     item.quantity++;
+//     this.cartService.saveCart(this.cartItems);
+//   }
 
-  // ➖ decrease
-  decrease(item: any) {
-    if (item.quantity > 1) {
-      item.quantity--;
-      this.cartService.saveCart(this.cartItems);
-    }
-  }
+//   // ➖ decrease
+//   decrease(item: any) {
+//     if (item.quantity > 1) {
+//       item.quantity--;
+//       this.cartService.saveCart(this.cartItems);
+//     }
+//   }
 
-  // 🗑️ remove
-  remove(item: any) {
-    this.cartService.removeItem(item.productId);
-  }
+//   // 🗑️ remove
+//   remove(item: any) {
+//     this.cartService.removeItem(item.productId);
+//   }
 
-  // ❌ close sidebar
-  close() {
-    this.cartService.closeSidebar();
-  }
+//   // ❌ close sidebar
+//   close() {
+//     this.cartService.closeSidebar();
+//   }
 
-  // 💳 CHECKOUT (ONLY HERE API CALL HOGA)
+//   // 💳 CHECKOUT (ONLY HERE API CALL HOGA)
 
-  checkout() {
+//   checkout() {
 
-  const userId = localStorage.getItem('userId');
+//   const userId = localStorage.getItem('userId');
 
-  if (!userId) {
-    alert('User not logged in ❌');
-    return;
-  }
+//   if (!userId) {
+//     alert('User not logged in ❌');
+//     return;
+//   }
 
-  if (this.cartItems.length === 0) {
-    alert('Cart is empty ❌');
-    return;
-  }
+//   if (this.cartItems.length === 0) {
+//     alert('Cart is empty ❌');
+//     return;
+//   }
 
-  const order = {
-    orderNumber: 'ORD-' + Date.now(),
-    totalAmount: Number(this.subtotal + 10),
-    status: 'Pending',
-    userId: userId,
+//   const order = {
+//     orderNumber: 'ORD-' + Date.now(),
+//     totalAmount: Number(this.subtotal + 10),
+//     status: 'Pending',
+//     userId: userId,
 
-    items: this.cartItems.map(item => ({
-      productId: item.productId,
-      productName: item.productName,
-      price: Number(item.price),
-      quantity: Number(item.quantity),
-      image: item.image
-    }))
-  };
+//     items: this.cartItems.map(item => ({
+//       productId: item.productId,
+//       productName: item.productName,
+//       price: Number(item.price),
+//       quantity: Number(item.quantity),
+//       image: item.image
+//     }))
+//   };
 
-  console.log("ORDER:", order); // 🔥 DEBUG
+//   console.log("ORDER:", order); // 🔥 DEBUG
 
-  this.orderService.placeOrder(order).subscribe({
-    next: () => {
-      alert('Order placed successfully ✅');
-      this.cartService.clearCart();
-      this.close();
-    },
-    error: (err) => {
-      console.error("ERROR:", err);
-      alert('Order failed ❌');
-    }
-  });
-}
+//   this.orderService.placeOrder(order).subscribe({
+//     next: () => {
+//       alert('Order placed successfully ✅');
+//       this.cartService.clearCart();
+//       this.close();
+//     },
+//     error: (err) => {
+//       console.error("ERROR:", err);
+//       alert('Order failed ❌');
+//     }
+//   });
+// }
 
   // checkout() {
 

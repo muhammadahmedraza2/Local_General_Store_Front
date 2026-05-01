@@ -1,23 +1,107 @@
-.category-title {
-  font-size: 22px;
-  font-weight: bold;
-  margin: 20px 0 10px;
+/* ===== GLOBAL ===== */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #eef2f7, #d9e4f5);
+  overflow: hidden; /* ❌ body scroll band */
 }
 
-.product-row {
+/* ===== MAIN CONTAINER ===== */
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+/* ===== HEADER ===== */
+.header {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0a0a0a;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 10px;
+}
+
+/* ===== GRID WRAPPER (SCROLL FIXED) ===== */
+.grid {
+  margin-top: 15px;
+  flex: 1;
+  min-height: 0;        /* 🔥 MOST IMPORTANT FIX */
+  overflow-y: auto;     /* ✅ scroll enable */
+  padding-right: 5px;
+
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 🔥 3 per row */
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 15px;
 }
 
-@media (max-width: 768px) {
-  .product-row {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* ===== CARD ===== */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-@media (max-width: 480px) {
-  .product-row {
-    grid-template-columns: repeat(1, 1fr);
-  }
+.cart-btn {
+  color: #16a34a;
+  font-weight: 900;
+}
+
+/* IMAGE */
+.img-box {
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-box img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* CONTENT */
+.content {
+  text-align: center;
+}
+
+.price {
+  font-weight: bold;
+  color: #16a34a;
+}
+
+/* BUTTON */
+button {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border: none;
+  background: #4f46e5;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #e2e1e6;
+}
+
+/* ===== SCROLLBAR ===== */
+.grid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.grid::-webkit-scrollbar-thumb {
+  background: #9ca3af;
+  border-radius: 10px;
+}
+
+.grid::-webkit-scrollbar-track {
+  background: transparent;
 }

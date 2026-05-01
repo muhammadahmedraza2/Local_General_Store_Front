@@ -12,7 +12,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router
-  ) {}
+  ) { }
 
   login(data: any) {
     return this.http.post<any>(`${this.api}/login`, data);
@@ -34,27 +34,50 @@ export class AuthService {
   // SAVE USER (IMPORTANT FIX)
   // ==========================
 
-// saveUser(res: any) {
-//   localStorage.setItem('token', res.token);
+  // saveUser(res: any) {
+  //   localStorage.setItem('token', res.token);
 
-//   // ✅ res.user ke andar se lo (register response)
-//   // ✅ ya directly res se lo (login response)
-//   const userData = res.user || res;
+  //   // ✅ res.user ke andar se lo (register response)
+  //   // ✅ ya directly res se lo (login response)
+  //   const userData = res.user || res;
 
-//   const user = {
-//     userId: userData.id || userData.userId,
-//     name: userData.name,
-//     email: userData.email,
-//     role: userData.role,
-//     imageUrl: userData.imageUrl || null   // ✅ ab sahi se milega
-//   };
+  //   const user = {
+  //     userId: userData.id || userData.userId,
+  //     name: userData.name,
+  //     email: userData.email,
+  //     role: userData.role,
+  //     imageUrl: userData.imageUrl || null   // ✅ ab sahi se milega
+  //   };
 
-//   localStorage.setItem('user', JSON.stringify(user));
-// }
+  //   localStorage.setItem('user', JSON.stringify(user));
+  // }
 
+
+  // saveUser(res: any) {
+  //   localStorage.setItem('token', res.token);
+
+  //   const userData = res.user || res;
+
+  //   const user = {
+  //     userId: userData.id || userData.userId,
+  //     name: userData.name,
+  //     email: userData.email,
+  //     role: userData.role,
+  //     phoneNumber: userData.phoneNumber || '',
+  //     dateOfBirth: userData.dateOfBirth || '',
+  //     gender: userData.gender || '',
+  //     imageUrl: userData.imageUrl || null
+  //   };
+
+  //   localStorage.setItem('user', JSON.stringify(user));
+  //   localStorage.setItem('userId', String(userData.id || userData.userId)); // ✅ userId alag save karo
+
+  // }
 
 saveUser(res: any) {
-  localStorage.setItem('token', res.token);
+  if (res.token) {
+    localStorage.setItem('token', res.token);
+  }
 
   const userData = res.user || res;
 
@@ -63,16 +86,17 @@ saveUser(res: any) {
     name: userData.name,
     email: userData.email,
     role: userData.role,
-    phoneNumber: userData.phoneNumber || '',
-    dateOfBirth: userData.dateOfBirth || '',
-    gender: userData.gender || '',
     imageUrl: userData.imageUrl || null
   };
 
   localStorage.setItem('user', JSON.stringify(user));
+  
+  // ✅ userId alag se bhi save karo
+  localStorage.setItem('userId', String(userData.id || userData.userId || ''));
 }
 
-// saveUser(res: any) {
+
+  // saveUser(res: any) {
   //   localStorage.setItem('token', res.token);
 
   //   const user = {

@@ -1,37 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class OrderService {
 
   private api = 'http://localhost:5000/api/Orders';
 
-  private ordersSubject = new BehaviorSubject<any[]>([]);
-  orders$ = this.ordersSubject.asObservable();
-
   constructor(private http: HttpClient) {}
 
-  // 📥 GET Orders (only when needed)
+  // ✅ Order place karo
+  placeOrder(order: any) {
+    return this.http.post<any>(this.api, order);
+  }
+
+  // ✅ Sab orders lo
   getOrders() {
     return this.http.get<any[]>(this.api);
   }
 
-  getOrdersByUser(userId: string) {
-  return this.http.get<any[]>(`${this.api}/user/${userId}`);
-}
+  // ✅ User ke orders lo
+  // getOrdersByUser(userId: string) {
+  //   return this.http.get<any[]>(`${this.api}?userId=${userId}`);
+  // }
 
-  // 🔄 Refresh Orders manually
-  loadOrders() {
-    this.getOrders().subscribe(res => {
-      this.ordersSubject.next(res);
-    });
+    getOrdersByUser(userId: string) {
+    return this.http.get<any[]>(`${this.api}/user/${userId}`);
   }
 
-  // ➕ POST Order (checkout only)
-  placeOrder(order: any) {
-    return this.http.post(this.api, order);
-  }
 }

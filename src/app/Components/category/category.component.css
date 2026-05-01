@@ -90,7 +90,10 @@
 }
 /* HEADER */
 .table-header {
+  height: 50px;
   flex-shrink: 0;
+  margin-top: 10px;
+  margin-left: 20px;
   position: sticky;
   top: 0;
   background: #fff;
@@ -157,7 +160,7 @@ tr:hover td {
 
 /* ================= IMAGE ================= */
 .cat-img {
-  width: 38px;
+  width: auto;
   height: 38px;
   border-radius: 8px;
   object-fit: cover;
@@ -240,12 +243,26 @@ td:last-child {
   z-index: 999;
 }
 
+/* ================= PREVIEW IMAGE ================= */
+.preview-img {
+  width: 12%;
+  /* max-height: 100px; */
+  object-fit: contain;
+  border-radius: 8px;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+}
+
+/* ================= MODAL SCROLL ================= */
 .modal-box {
   background: #fff;
   border-radius: 12px;
   padding: 1.5rem;
   width: 400px;
   max-width: 95%;
+  max-height: 90vh;      /* ✅ Screen se bahar na jaye */
+  overflow-y: auto;      /* ✅ Scroll kare agar content zyada ho */
 }
 
 .modal-title {

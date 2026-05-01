@@ -1,15 +1,102 @@
-<h2>🛒 Your Cart</h2>
+<div class="cart-wrap">
 
-<div *ngIf="cartItems.length === 0">
-  Cart is empty
-</div>
+  <!-- Title -->
+  <div class="cart-header">
+    <h1 class="cart-title">Cart</h1>
+    <!-- <div class="steps">
+      <span class="step-active">1. Cart</span>
+      <div class="step-line"></div>
+      <span class="step-inactive">2. Checkout</span>
+      <div class="step-line"></div>
+      <span class="step-inactive">3. Payment</span>
+    </div> -->
+  </div>
 
-<div *ngFor="let item of cartItems" class="cart-item">
+  <!-- Empty -->
+  <div *ngIf="cartItems.length === 0" class="empty-cart">
+    <i class="bi bi-cart-x"></i>
+    <p>Your cart is empty</p>
+    <button routerLink="/">Continue Shopping</button>
+  </div>
 
-  <img [src]="item.image" width="60" />
+  <!-- Cart Layout -->
+  <div class="cart-layout" *ngIf="cartItems.length > 0">
 
-<h3>{{ item.productName }}</h3>
-<p>Rs {{ item.price }}</p>
-<p>Qty: {{ item.quantity }}</p>
+    <!-- LEFT: Items -->
+    <div class="items-col">
+      <div class="cart-item" *ngFor="let item of cartItems">
+
+        <div class="item-img">
+          <img
+            [src]="getImageUrl(item.image)"
+            alt="{{ item.productName }}"
+            (error)="onImgError($event)"
+          />
+        </div>
+
+        <div class="item-info">
+          <h4>{{ item.productName }}</h4>
+          <p class="item-price">Rs {{ item.price }}</p>
+          <div class="qty-row">
+            <button class="qty-btn" (click)="decrease(item)">−</button>
+            <span class="qty-num">{{ item.quantity }}</span>
+            <button class="qty-btn" (click)="increase(item)">+</button>
+          </div>
+        </div>
+
+        <div class="item-right">
+          <button class="delete-btn" (click)="remove(item)">
+            <i class="bi bi-trash"></i>
+          </button>
+          <span class="item-total">Rs {{ item.price * item.quantity }}</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: Summary -->
+    <div class="summary-card">
+
+      <h3 class="summary-title">Order Summary</h3>
+
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span>Rs {{ subtotal }}</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Shipping</span>
+        <span class="free">Free</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Tax</span>
+        <span>Rs 0</span>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="summary-row total-row">
+        <span>Total</span>
+        <span>Rs {{ subtotal }}</span>
+      </div>
+
+      <!-- Checkout -->
+      <button
+        class="checkout-btn"
+        (click)="checkout()"
+        [disabled]="loading"
+      >
+        <i class="bi bi-bag-check-fill"></i>
+        {{ loading ? 'Placing Order...' : 'Proceed to Checkout (Rs ' + subtotal + ')' }}
+      </button>
+
+      <p class="delivery-note">
+        Estimated Delivery: <strong>3-5 Business Days</strong>
+      </p>
+
+    </div>
+
+  </div>
 
 </div>

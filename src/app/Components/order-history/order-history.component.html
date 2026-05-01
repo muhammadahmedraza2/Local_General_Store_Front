@@ -1,39 +1,135 @@
-<div class="container">
+<div class="history-wrap">
 
-  <h2>Order History</h2>
-
-  <div *ngIf="orders.length === 0">
-    <p>No orders found 😐</p>
+  <!-- ===== HEADER ===== -->
+  <div class="page-header">
+    <div>
+      <h1>Order History</h1>
+      <p class="subtitle">Track all your previous orders</p>
+    </div>
+    <button class="shop-btn" (click)="goShopping()">
+      <i class="bi bi-bag-plus"></i> Continue Shopping
+    </button>
   </div>
 
-  <div class="order-card" *ngFor="let order of orders">
-
-    <!-- HEADER -->
-    <div class="order-header">
-
-      <div>
-        <p class="order-no">Order #: {{ order.orderNumber }}</p>
-        <p class="date">{{ order.date | date:'medium' }}</p>
-      </div>
-
-      <div class="right">
-        <p class="status">{{ order.status }}</p>
-        <p class="total">Total: ${{ order.total }}</p>
-      </div>
-
+  <!-- ===== FILTERS ===== -->
+  <div class="filters">
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Search by order number or product..."
+      (input)="search($event)"
+    />
+    <div class="status-filters">
+      <button
+        [class.active]="selectedStatus === ''"
+        (click)="filterByStatus('')">
+        All
+      </button>
+      <button
+        [class.active]="selectedStatus === 'Pending'"
+        (click)="filterByStatus('Pending')">
+        Pending
+      </button>
+      <button
+        [class.active]="selectedStatus === 'Processing'"
+        (click)="filterByStatus('Processing')">
+        Processing
+      </button>
+      <button
+        [class.active]="selectedStatus === 'Delivered'"
+        (click)="filterByStatus('Delivered')">
+        Delivered
+      </button>
+      <button
+        [class.active]="selectedStatus === 'Cancelled'"
+        (click)="filterByStatus('Cancelled')">
+        Cancelled
+      </button>
     </div>
+  </div>
 
-    <!-- ITEMS -->
-    <div class="items">
+  <!-- ===== LOADING ===== -->
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading your orders...</p>
+  </div>
 
-      <div class="item" *ngFor="let item of order.items">
+  <!-- ===== EMPTY ===== -->
+  <div *ngIf="!loading && filteredOrders.length === 0" class="empty">
+    <i class="bi bi-clock-history"></i>
+    <h3>No orders found</h3>
+    <p>You haven't placed any orders yet</p>
+    <button (click)="goShopping()">Start Shopping</button>
+  </div>
 
-        <img [src]="item.image" />
+  <!-- ===== ORDERS LIST ===== -->
+  <div class="orders-list" *ngIf="!loading && filteredOrders.length > 0">
 
-        <div class="info">
-          <h4>{{ item.productName }}</h4>
-          <p>Qty: {{ item.quantity }}</p>
-          <p>Price: ${{ item.price }}</p>
+    <div
+      class="order-card"
+      *ngFor="let order of filteredOrders"
+    >
+
+      <!-- Order Header -->
+      <div class="order-head" (click)="toggleOrder(order.orderNumber)">
+
+        <div class="order-meta">
+          <span class="order-num">{{ order.orderNumber }}</span>
+          <span class="order-date">{{ formatDate(order.createdAt) }}</span>
+        </div>
+
+        <div class="order-info">
+          <span class="items-count">
+            <i class="bi bi-box"></i>
+            {{ totalItems(order) }} items
+          </span>
+          <span class="order-amount">Rs {{ order.totalAmount }}</span>
+          <span class="badge" [ngClass]="getStatusClass(order.status)">
+            {{ order.status }}
+          </span>
+          <i class="bi" [ngClass]="expandedOrder === order.orderNumber ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+        </div>
+
+      </div>
+
+      <!-- Order Items — Expandable -->
+      <div class="order-items" *ngIf="expandedOrder === order.orderNumber">
+
+        <div class="order-item" *ngFor="let item of order.items">
+
+          <div class="prod-img">
+            <img
+              [src]="getImageUrl(item.image)"
+              alt="{{ item.productName }}"
+              (error)="onImgError($event)"
+            />
+          </div>
+
+          <div class="prod-info">
+            <h4>{{ item.productName }}</h4>
+            <p>Rs {{ item.price }} × {{ item.quantity }}</p>
+          </div>
+
+          <div class="prod-total">
+            Rs {{ item.price * item.quantity }}
+          </div>
+
+        </div>
+
+        <!-- Order Footer -->
+        <div class="order-footer">
+          <div class="footer-row">
+            <span>Subtotal</span>
+            <span>Rs {{ order.totalAmount }}</span>
+          </div>
+          <div class="footer-row">
+            <span>Shipping</span>
+            <span class="free">Free</span>
+          </div>
+          <div class="footer-row total">
+            <span>Total</span>
+            <span>Rs {{ order.totalAmount }}</span>
+          </div>
         </div>
 
       </div>

@@ -1,8 +1,8 @@
-<div class="overlay" *ngIf="isOpen" (click)="close()"></div>
+<!-- <div class="overlay" *ngIf="isOpen" (click)="close()"></div>
 
 <div class="sidebar" [class.open]="isOpen">
 
-  <!-- HEADER -->
+  
   <div class="header">
     <h2>Order Details</h2>
     <button class="close" (click)="close()">✕</button>
@@ -10,7 +10,7 @@
 
   <h3>My Cart</h3>
 
-  <!-- CART ITEMS -->
+  
   <div class="cart-item" *ngFor="let item of cartItems">
 
     <img [src]="item.image" />
@@ -19,7 +19,7 @@
       <h4>{{ item.productName }}</h4>
       <p>${{ item.price }}</p>
 
-      <!-- QUANTITY CONTROLS -->
+      
       <div class="qty">
 
         <button (click)="decrease(item)">-</button>
@@ -35,19 +35,19 @@
 
   </div>
 
-  <!-- DELIVERY -->
+  
   <div class="section">
     <h4>Delivery Location</h4>
     <p>📍 2 Petro Melikishvili St.</p>
   </div>
 
-  <!-- PAYMENT -->
-  <!-- <div class="section">
+  
+   <div class="section">
     <h4>Payment Method</h4>
     <p>💳 VISA Classic **** 0921</p>
-  </div> -->
+  </div> 
 
-  <!-- SUMMARY -->
+  
   <div class="summary">
 
     <div class="row">
@@ -62,14 +62,14 @@
 
     <div class="row total">
       <span>Total</span>
-      <!-- <span>${{ subtotal + 10 }}</span> -->
+       <span>${{ subtotal + 10 }}</span> 
     </div>
 
   </div>
 
-  <!-- CHECKOUT -->
+  
 <button class="checkout" (click)="checkout()">
   Checkout (${{ subtotal + 10 }})
 </button>
 
-</div>
+</div> -->

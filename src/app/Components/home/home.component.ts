@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartService } from 'src/services/cart.service';
 import { ProductService } from 'src/services/product.service';
 // import { ProductService } from 'src/app/services/product.service';
@@ -15,8 +16,10 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private cartService: CartService
-  ) {}
+    private cartService: CartService,
+    private router: Router   // 👈 add this
+
+  ) { }
 
   ngOnInit() {
     this.productService.getProducts().subscribe((res: any) => {
@@ -24,17 +27,18 @@ export class HomeComponent implements OnInit {
     });
   }
 
-addToCart(product: any) {
-  this.cartService.addToCart(product);  // ✅ direct call (no subscribe)
-  this.cartService.openSidebar();
-}
+  addToCart(product: any) {
+    this.cartService.addToCart(product);   // item add
 
-// addToCart(product: any) {
-//   this.cartService.addToCart(product).subscribe({
-//     next: () => {
-//       this.cartService.loadCart();   // refresh cart
-//       this.cartService.openSidebar(); // open sidebar
-//     }
-//   });
-// }
+    this.router.navigate(['/cart']);       // 👈 redirect to cart page
+  }
+
+  // addToCart(product: any) {
+  //   this.cartService.addToCart(product).subscribe({
+  //     next: () => {
+  //       this.cartService.loadCart();   // refresh cart
+  //       this.cartService.openSidebar(); // open sidebar
+  //     }
+  //   });
+  // }
 }

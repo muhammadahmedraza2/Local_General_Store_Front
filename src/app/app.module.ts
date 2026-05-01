@@ -18,6 +18,7 @@ import { RegistrationComponent } from './Login-Register/registration/registratio
 import { ProfileComponent } from './Login-Register/profile/profile.component';
 import { NotFoundComponent } from './NotFounded/not-found/not-found.component';
 import { CategoryComponent } from './Components/category/category.component';
+// import { HistoryComponent } from './Components/history/history.component';
 // import { RegistrationComponent } from './Login-Register/registration/registration.component';
 
 @NgModule({
@@ -35,7 +36,8 @@ import { CategoryComponent } from './Components/category/category.component';
     RegistrationComponent,
     ProfileComponent,
     NotFoundComponent,
-    CategoryComponent
+    CategoryComponent,
+    // HistoryComponent
   ],
   imports: [
     BrowserModule,
