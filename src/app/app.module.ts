@@ -18,6 +18,7 @@ import { RegistrationComponent } from './Login-Register/registration/registratio
 import { ProfileComponent } from './Login-Register/profile/profile.component';
 import { NotFoundComponent } from './NotFounded/not-found/not-found.component';
 import { CategoryComponent } from './Components/category/category.component';
+import { FooterComponent } from './Login-Register/footer/footer.component';
 // import { HistoryComponent } from './Components/history/history.component';
 // import { RegistrationComponent } from './Login-Register/registration/registration.component';
 
@@ -37,6 +38,7 @@ import { CategoryComponent } from './Components/category/category.component';
     ProfileComponent,
     NotFoundComponent,
     CategoryComponent,
+    FooterComponent,
     // HistoryComponent
   ],
   imports: [
