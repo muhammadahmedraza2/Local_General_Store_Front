@@ -19,8 +19,7 @@ import { ProfileComponent } from './Login-Register/profile/profile.component';
 import { NotFoundComponent } from './NotFounded/not-found/not-found.component';
 import { CategoryComponent } from './Components/category/category.component';
 import { FooterComponent } from './Login-Register/footer/footer.component';
-// import { HistoryComponent } from './Components/history/history.component';
-// import { RegistrationComponent } from './Login-Register/registration/registration.component';
+import { NotificationsComponent } from './Login-Register/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -39,14 +38,15 @@ import { FooterComponent } from './Login-Register/footer/footer.component';
     NotFoundComponent,
     CategoryComponent,
     FooterComponent,
-    // HistoryComponent
+    NotificationsComponent // ✅ OK NOW
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-  FormsModule,
+    FormsModule,
     HttpClientModule
+    // ❌ CommonModule NOT needed here
   ],
   providers: [],
   bootstrap: [AppComponent]

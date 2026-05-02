@@ -15,6 +15,7 @@ import { ProfileComponent } from './Login-Register/profile/profile.component';
 import { AuthGuard } from 'src/Guard/auth.guard';
 import { NotFoundComponent } from './NotFounded/not-found/not-found.component';
 import { CategoryComponent } from './Components/category/category.component';
+import { NotificationsComponent } from './Login-Register/notification/notification.component';
 
 const routes: Routes = [
 
@@ -34,7 +35,8 @@ const routes: Routes = [
       { path: 'product', component: ProductListComponent },
       { path: 'order-history', component: OrderHistoryComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'category', component: CategoryComponent }
+      { path: 'category', component: CategoryComponent },
+      { path: 'notifications', component: NotificationsComponent }
     ]
   },
 

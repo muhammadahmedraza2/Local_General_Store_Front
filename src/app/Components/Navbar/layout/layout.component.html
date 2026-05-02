@@ -91,19 +91,24 @@
         <h3>Local General Store</h3>
       </div>
 
-      <div class="right-top">
-        <i class="bi bi-bell-fill notify"></i>
+ <div class="right-top">
 
-        <!-- TOPBAR IMAGE -->
-        <img
-          [src]="
-            user?.imageUrl
-              ? 'http://localhost:5000/Uploads/' + user.imageUrl
-              : 'assets/default-avatar.png'
-          "
-          alt="user"
-        />
-      </div>
+  <div class="bell-wrapper" routerLink="/notifications">
+    <i class="bi bi-bell-fill notify"></i>
+
+    <span class="badge" *ngIf="notificationsCount > 0">
+      {{ notificationsCount }}
+    </span>
+  </div>
+
+  <img
+    [src]="user?.imageUrl
+      ? 'http://localhost:5000/Uploads/' + user.imageUrl
+      : 'assets/default-avatar.png'"
+    alt="user"
+  />
+
+</div>
     </header>
 
     <!-- Content -->

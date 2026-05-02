@@ -1,0 +1,28 @@
+<div class="notification-page">
+
+  <h2>Notifications</h2>
+
+  <div *ngIf="notifications.length === 0" class="empty">
+    <i class="bi bi-bell-slash"></i>
+    <p>No notifications yet</p>
+  </div>
+
+  <div *ngFor="let n of notifications" class="card">
+
+    <div class="left">
+      <i class="bi bi-bell"></i>
+    </div>
+
+    <div class="middle">
+      <h4>Order #{{ n.orderId }}</h4>
+      <p>{{ n.message }}</p>
+      <span>{{ n.createdAt | date:'short' }}</span>
+    </div>
+
+    <div class="right" [ngClass]="n.status.toLowerCase()">
+      {{ n.status }}
+    </div>
+
+  </div>
+
+</div>

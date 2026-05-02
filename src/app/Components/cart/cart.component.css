@@ -211,6 +211,28 @@
   flex-shrink: 0;
 }
 
+.empty-cart button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  border: none;
+  color: white;
+  font-size: 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.empty-cart button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+}
+
+.empty-cart button:active {
+  transform: scale(0.96);
+}
+
 .delete-btn {
   width: 30px;
   height: 30px;
