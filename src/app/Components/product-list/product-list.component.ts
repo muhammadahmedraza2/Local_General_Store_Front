@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/services/product.service';
 import { Product } from 'src/Interfaces/product.model';
 import { CartService } from 'src/services/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -17,7 +18,8 @@ export class ProductListComponent implements OnInit {
   
 constructor(
   private productService: ProductService,
-  private cartService: CartService
+  private cartService: CartService,
+  private router: Router,
 ) {}
 
   ngOnInit() {
@@ -41,8 +43,9 @@ constructor(
   }
 
 
-onAddToCart(product: Product) {
-  this.cartService.addToCart(product);   // ✅ direct call
-  alert('Added to cart');
-}
+ addToCart(product: any) {
+    this.cartService.addToCart(product);   // item add
+
+    this.router.navigate(['/cart']);       // 👈 redirect to cart page
+  }
 }
