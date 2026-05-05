@@ -4,4 +4,6 @@ export interface Product {
   price: number;
   category: string;
   image: string;
+  stock: string;  // ← yeh add karo
+
 }

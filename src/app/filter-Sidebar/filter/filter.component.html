@@ -1,0 +1,79 @@
+<div class="filter-wrapper">
+  <div class="filter-card">
+
+    <!-- HEADER -->
+    <div class="filter-header">
+      <h3>Filters</h3>
+      <button class="close-btn" (click)="resetAll()">✕</button>
+    </div>
+
+    <!-- CATEGORY -->
+    <div class="filter-section">
+      <label class="filter-label">Category</label>
+      <select class="filter-select" [(ngModel)]="selectedCategory" (change)="applyFilter()">
+        <option value="">All Categories</option>
+        <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+      </select>
+    </div>
+
+    <!-- PRODUCT NAME -->
+    <div class="filter-section">
+      <label class="filter-label">Product Name</label>
+      <select class="filter-select" [(ngModel)]="selectedProduct" (change)="applyFilter()">
+        <option value="">All Products</option>
+        <option *ngFor="let p of allProducts" [value]="p.name">{{ p.name }}</option>
+      </select>
+    </div>
+
+    <!-- PRICE RANGE -->
+    <div class="filter-section">
+      <div class="filter-label-row">
+        <span>Price Range</span>
+        <button class="reset-btn" (click)="resetPrice()">Reset</button>
+      </div>
+      <div class="price-boxes">
+        <div class="price-box">
+          <span class="price-label">From $</span>
+          <span class="price-value">{{ priceMin }}</span>
+        </div>
+        <span class="price-separator">—</span>
+        <div class="price-box">
+          <span class="price-label">To $</span>
+          <span class="price-value">{{ priceMax }}</span>
+        </div>
+      </div>
+      <input class="filter-range" type="range" min="0" max="1000" step="10" [(ngModel)]="priceMin" (input)="applyFilter()"/>
+      <input class="filter-range" type="range" min="0" max="1000" step="10" [(ngModel)]="priceMax" (input)="applyFilter()"/>
+    </div>
+
+    <!-- STOCK STATUS -->
+    <div class="filter-section">
+      <div class="filter-label-row">
+        <span>Stock Status</span>
+      </div>
+      <div class="tag-group">
+        <span class="stock-tag" [class.active]="isStockActive('In Stock')" (click)="toggleStock('In Stock')">In Stock</span>
+        <span class="stock-tag" [class.active]="isStockActive('Out of Stock')" (click)="toggleStock('Out of Stock')">Out of Stock</span>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="results-section">
+      <div class="result-count">Results: <span>{{ filtered.length }} products</span></div>
+      <div class="product-list">
+        <div class="product-list-item" *ngFor="let p of filtered">
+          <span>{{ p.name }}</span>
+          <span class="product-price">${{ p.price }}</span>
+        </div>
+        <div class="no-results" *ngIf="filtered.length === 0">No results found</div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="filter-footer">
+      <button class="btn-apply" (click)="applyFilter()">Show Results</button>
+      <button class="btn-reset" (click)="resetAll()">Reset All</button>
+    </div>
+
+  </div>
+</div>

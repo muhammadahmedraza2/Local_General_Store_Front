@@ -1,5 +1,5 @@
 <div class="content">
   <app-cart-sidebar></app-cart-sidebar>
   <router-outlet></router-outlet>
-  <app-footer></app-footer>
+  <app-footer *ngIf="isLoggedIn"></app-footer>
 </div>

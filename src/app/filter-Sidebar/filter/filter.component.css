@@ -1,0 +1,268 @@
+/* ===== FILTER PANEL WRAPPER ===== */
+.filter-wrapper {
+  background: #f4f4f4;
+  border-radius: 16px;
+  padding: 12px;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+/* ===== FILTER CARD ===== */
+.filter-card {
+  background: #ffffff;
+  border: 0.5px solid #e0e0e0;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* ===== FILTER HEADER ===== */
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 0.5px solid #e0e0e0;
+}
+
+.filter-header h3 {
+  font-size: 15px;
+  font-weight: 500;
+  color: #111111;
+  margin: 0;
+}
+
+.filter-header .close-btn {
+  font-size: 13px;
+  color: #888888;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* ===== FILTER SECTION (each row) ===== */
+.filter-section {
+  padding: 14px 16px;
+  border-bottom: 0.5px solid #e0e0e0;
+}
+
+.filter-section:last-of-type {
+  border-bottom: none;
+}
+
+/* ===== SECTION LABEL ===== */
+.filter-label {
+  font-size: 12px;
+  color: #888888;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.filter-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.filter-label-row span {
+  font-size: 12px;
+  color: #888888;
+}
+
+.reset-btn {
+  font-size: 11px;
+  color: #1a73e8;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* ===== SELECT DROPDOWN ===== */
+.filter-select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 0.5px solid #cccccc;
+  background: #ffffff;
+  color: #111111;
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+  appearance: auto;
+}
+
+.filter-select:focus {
+  border-color: #888888;
+}
+
+/* ===== PRICE BOXES ===== */
+.price-boxes {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.price-box {
+  flex: 1;
+  background: #f4f4f4;
+  border: 0.5px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+
+.price-box .price-label {
+  font-size: 10px;
+  color: #888888;
+  display: block;
+}
+
+.price-box .price-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111111;
+}
+
+.price-separator {
+  font-size: 12px;
+  color: #888888;
+}
+
+/* ===== RANGE SLIDERS ===== */
+.filter-range {
+  width: 100%;
+  margin-bottom: 6px;
+  accent-color: #111111;
+  cursor: pointer;
+}
+
+.filter-range:last-child {
+  margin-bottom: 0;
+}
+
+/* ===== STOCK TAGS ===== */
+.tag-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.stock-tag {
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: 0.5px solid #e0e0e0;
+  background: #f4f4f4;
+  color: #888888;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.stock-tag.active {
+  background: #e8f0fe;
+  color: #1a73e8;
+  border-color: #aec6f5;
+}
+
+/* ===== RESULTS SECTION ===== */
+.results-section {
+  padding: 14px 16px;
+  border-bottom: 0.5px solid #e0e0e0;
+}
+
+.result-count {
+  font-size: 12px;
+  color: #888888;
+  margin-bottom: 8px;
+}
+
+.result-count span {
+  font-weight: 500;
+  color: #111111;
+}
+
+.product-list {
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.product-list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  font-size: 12px;
+  color: #555555;
+  border-bottom: 0.5px solid #eeeeee;
+}
+
+.product-list-item:last-child {
+  border-bottom: none;
+}
+
+.product-list-item .product-price {
+  font-weight: 500;
+  color: #111111;
+}
+
+.no-results {
+  font-size: 12px;
+  color: #888888;
+}
+
+/* ===== FOOTER BUTTONS ===== */
+.filter-footer {
+  display: flex;
+  gap: 8px;
+  padding: 14px 16px;
+}
+
+.btn-apply {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #111111;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-apply:hover {
+  background: #333333;
+}
+
+.btn-reset {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 0.5px solid #cccccc;
+  background: transparent;
+  color: #888888;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-reset:hover {
+  background: #f4f4f4;
+  color: #111111;
+}
+
+/* ===== SCROLLBAR (product list) ===== */
+.product-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.product-list::-webkit-scrollbar-track {
+  background: #f4f4f4;
+  border-radius: 4px;
+}
+
+.product-list::-webkit-scrollbar-thumb {
+  background: #cccccc;
+  border-radius: 4px;
+}

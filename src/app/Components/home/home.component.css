@@ -63,6 +63,37 @@ html, body {
   align-items: center;
 }
 
+/* =======  Filter  ======= */
+
+/* Filter Toggle Button */
+.filter-toggle-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #111111;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.filter-toggle-btn:hover {
+  background: #333333;
+}
+
+/* Filter panel position */
+.filter-wrapper {
+  position: absolute;
+  top: 70px;
+  right: 15px;
+  z-index: 999;
+  width: 320px;
+}
+
+/* =======  Filter  ======= */
+
+
+
 .img-box img {
   max-height: 100%;
   max-width: 100%;

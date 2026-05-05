@@ -8,11 +8,68 @@
       </strong>
     </div>
 
-    <a routerLink="/cart" class="cart-btn">Cart 🛍️</a>
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <button class="filter-toggle-btn" (click)="toggleFilter()">
+        <i class="bi bi-funnel-fill"></i> Filter
+      </button>
+      <a routerLink="/cart" class="cart-btn">Cart 🛍️</a>
+    </div>
   </header>
 
-  <div class="grid">
+  <!-- FILTER PANEL -->
+  <div class="filter-wrapper" *ngIf="isFilterOpen">
+    <div class="filter-card">
 
+      <div class="filter-header">
+        <h3>Filters</h3>
+        <button class="close-btn" (click)="toggleFilter()">✕</button>
+      </div>
+
+      <div class="filter-section">
+        <label class="filter-label">Category</label>
+        <select class="filter-select" [(ngModel)]="selectedCategory" (change)="applyFilter()">
+          <option value="">All Categories</option>
+          <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+        </select>
+      </div>
+
+      <div class="filter-section">
+        <label class="filter-label">Product Name</label>
+        <select class="filter-select" [(ngModel)]="selectedProduct" (change)="applyFilter()">
+          <option value="">All Products</option>
+          <option *ngFor="let p of allProducts" [value]="p.name">{{ p.name }}</option>
+        </select>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-label-row">
+          <span>Price Range</span>
+          <button class="reset-btn" (click)="resetPrice()">Reset</button>
+        </div>
+        <div class="price-boxes">
+          <div class="price-box">
+            <span class="price-label">From Rs</span>
+            <span class="price-value">{{ priceMin }}</span>
+          </div>
+          <span class="price-separator">—</span>
+          <div class="price-box">
+            <span class="price-label">To Rs</span>
+            <span class="price-value">{{ priceMax }}</span>
+          </div>
+        </div>
+        <input class="filter-range" type="range" min="0" max="100000" step="100" [(ngModel)]="priceMin" (input)="applyFilter()"/>
+        <input class="filter-range" type="range" min="0" max="100000" step="100" [(ngModel)]="priceMax" (input)="applyFilter()"/>
+      </div>
+
+      <div class="filter-footer">
+        <button class="btn-apply" (click)="toggleFilter()">Show Results</button>
+        <button class="btn-reset" (click)="resetAll()">Reset All</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="grid">
     <div class="card" *ngFor="let p of products">
       
       <div class="img-box">
@@ -30,7 +87,6 @@
       </div>
 
     </div>
-
   </div>
 
 </div>

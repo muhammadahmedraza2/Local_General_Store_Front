@@ -20,6 +20,7 @@ import { NotFoundComponent } from './NotFounded/not-found/not-found.component';
 import { CategoryComponent } from './Components/category/category.component';
 import { FooterComponent } from './Login-Register/footer/footer.component';
 import { NotificationsComponent } from './Login-Register/notification/notification.component';
+import { FilterComponent } from './filter-Sidebar/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -38,14 +39,15 @@ import { NotificationsComponent } from './Login-Register/notification/notificati
     NotFoundComponent,
     CategoryComponent,
     FooterComponent,
-    NotificationsComponent // ✅ OK NOW
+    NotificationsComponent,
+    FilterComponent // ✅ OK NOW
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule,
     FormsModule,
-    HttpClientModule
     // ❌ CommonModule NOT needed here
   ],
   providers: [],
