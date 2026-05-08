@@ -1,57 +1,227 @@
-<div class="login-container">
+<form [formGroup]="form" class="login-container">
 
   <div class="login-card">
 
     <h2>Create Account 📝</h2>
+    <p class="subtitle">Join us and start your journey</p>
 
+    <!-- NAME -->
     <div class="input-group">
-      <input type="text" [(ngModel)]="name" placeholder="Full Name" />
+
+      <input
+        type="text"
+        formControlName="name"
+        placeholder="Full Name"
+
+        [ngClass]="{
+          'is-invalid':
+          form.get('name')?.invalid &&
+          form.get('name')?.touched
+        }"
+      />
+
+      <small
+        class="error-text"
+        *ngIf="
+          form.get('name')?.invalid &&
+          form.get('name')?.touched
+        "
+      >
+        Name is required
+      </small>
+
     </div>
 
+    <!-- EMAIL -->
     <div class="input-group">
-      <input type="text" [(ngModel)]="email" placeholder="Email" />
+
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="Email"
+
+        [ngClass]="{
+          'is-invalid':
+          form.get('email')?.invalid &&
+          form.get('email')?.touched
+        }"
+      />
+
+      <small
+        class="error-text"
+        *ngIf="
+          form.get('email')?.invalid &&
+          form.get('email')?.touched
+        "
+      >
+        Valid email is required
+      </small>
+
     </div>
 
+    <!-- PASSWORD -->
     <div class="input-group password-group">
+
       <input
         [type]="showPassword ? 'text' : 'password'"
-        [(ngModel)]="password"
+        formControlName="password"
         placeholder="Password"
+
+        [ngClass]="{
+          'is-invalid':
+          form.get('password')?.invalid &&
+          form.get('password')?.touched
+        }"
       />
+
       <span class="toggle" (click)="togglePassword()">
-        <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+
+        <i
+          class="bi"
+          [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"
+        ></i>
+
       </span>
+
+      <small
+        class="error-text"
+        *ngIf="
+          form.get('password')?.invalid &&
+          form.get('password')?.touched
+        "
+      >
+        Password is required
+      </small>
+
     </div>
 
+    <!-- PHONE -->
     <div class="input-group">
-      <input type="text" [(ngModel)]="phone" placeholder="Phone" />
+
+      <input
+        type="text"
+        formControlName="phone"
+        placeholder="Phone"
+      />
+
     </div>
 
+    <!-- STORE NAME -->
     <div class="input-group">
-      <input type="date" [(ngModel)]="dateOfBirth" />
+
+      <input
+        type="text"
+        formControlName="storeName"
+        placeholder="Store Name"
+
+        [ngClass]="{
+          'is-invalid':
+          form.get('storeName')?.invalid &&
+          form.get('storeName')?.touched
+        }"
+      />
+
+      <small
+        class="error-text"
+        *ngIf="
+          form.get('storeName')?.invalid &&
+          form.get('storeName')?.touched
+        "
+      >
+        Store Name is required
+      </small>
+
     </div>
 
+    <!-- DOB -->
     <div class="input-group">
-      <select [(ngModel)]="gender">
+
+      <input
+        type="date"
+        formControlName="dateOfBirth"
+        class="form-control"
+      />
+
+    </div>
+
+    <!-- GENDER -->
+    <div class="input-group">
+
+      <select
+        class="form-select"
+        formControlName="gender"
+      >
+
         <option value="">Select Gender</option>
         <option value="male">Male</option>
         <option value="female">Female</option>
+
       </select>
+
     </div>
 
-    <div class="input-group">
-      <input type="file" (change)="onFileSelected($event)" />
+    <!-- PROFILE IMAGE -->
+    <div class="input-group file-upload">
+
+      <label class="file-label">
+
+        👤 Upload Profile Image
+
+        <input
+          type="file"
+          accept=".jpg,.jpeg,.png"
+          (change)="onFileSelected($event)"
+        />
+
+      </label>
+
+      <small *ngIf="selectedFile" class="file-name">
+        {{ selectedFile.name }}
+      </small>
+
     </div>
 
-    <button class="login-btn" (click)="register()">
+    <!-- STORE LOGO -->
+    <div class="input-group file-upload">
+
+      <label class="file-label">
+
+        🏪 Upload Store Logo
+
+        <input
+          type="file"
+          accept=".jpg,.jpeg,.png"
+          (change)="onStoreLogoSelected($event)"
+        />
+
+      </label>
+
+      <small *ngIf="storeLogoFile" class="file-name">
+        {{ storeLogoFile.name }}
+      </small>
+
+    </div>
+
+    <!-- BUTTON -->
+    <button
+      class="login-btn"
+      type="button"
+      (click)="register()"
+    >
       Register
     </button>
 
+    <!-- FOOTER -->
     <p class="footer">
+
       Already have an account?
-      <span routerLink="/login">Login</span>
+
+      <span routerLink="/login">
+        Login
+      </span>
+
     </p>
 
   </div>
 
-</div>
+</form>

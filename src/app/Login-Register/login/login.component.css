@@ -1,82 +1,128 @@
+
+/* PAGE */
 .login-container {
   height: 100vh;
-  background: linear-gradient(to right, #d4f5e9, #b2f2d7);
+  background: linear-gradient(135deg, #e8fdf5, #d2f8e5);
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Segoe UI', sans-serif;
 }
 
+/* CARD */
 .login-card {
-  background: white;
-  padding: 30px;
-  width: 350px;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  background: #ffffff;
+  padding: 35px 30px;
+  width: 380px;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
   text-align: center;
 }
 
+/* HEADINGS */
 h2 {
   margin-bottom: 5px;
+  color: #2e7d5b;
 }
 
 .subtitle {
-  color: gray;
+  color: #7a8f85;
   margin-bottom: 20px;
+  font-size: 13px;
 }
 
+/* INPUT */
 .input-group {
   margin-bottom: 15px;
   position: relative;
+  text-align: left;
 }
 
+/* INPUT STYLE */
 input {
   width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: 1px solid #dcdcdc;
+  font-size: 14px;
   outline: none;
+  background: #f9fdfb;
+  transition: 0.25s ease;
+}
+
+/* FOCUS */
+input:focus {
+  border-color: #2ecc71;
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.15);
+}
+
+/* 🔥 ERROR BORDER */
+.is-invalid {
+  border: 1px solid #e74c3c !important;
+  background: #fff5f5 !important;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.15) !important;
+}
+
+/* ERROR TEXT */
+.error-text {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+/* PASSWORD ICON */
+.password-group {
+  position: relative;
 }
 
 .password-group .toggle {
   position: absolute;
-  right: 10px;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
+  color: #777;
 }
 
+/* BUTTON */
 .login-btn {
   width: 100%;
-  padding: 10px;
-  background: #2ecc71;
+  padding: 12px;
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
   border: none;
   color: white;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   margin-top: 10px;
+  font-weight: 600;
 }
 
 .login-btn:hover {
-  background: #27ae60;
+  background: linear-gradient(135deg, #27ae60, #1e874b);
 }
 
+/* DIVIDER */
 .divider {
   margin: 15px 0;
   color: gray;
 }
 
+/* GOOGLE BUTTON */
 .google-btn {
   width: 100%;
   padding: 10px;
   background: white;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
+/* FOOTER */
 .footer {
   margin-top: 15px;
   font-size: 14px;
+  color: #666;
 }
 
 .footer span {

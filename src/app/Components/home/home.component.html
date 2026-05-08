@@ -1,92 +1,261 @@
 <div class="container">
-  
-  <header class="header">
-    <div>
-      <i class="bi bi-cart-fill"></i>
-      <strong style="margin-left: 10px; font-size: 20px;">
-        Smart General Store
-      </strong>
-    </div>
 
-    <div style="display: flex; gap: 10px; align-items: center;">
-      <button class="filter-toggle-btn" (click)="toggleFilter()">
-        <i class="bi bi-funnel-fill"></i> Filter
-      </button>
-      <a routerLink="/cart" class="cart-btn">Cart 🛍️</a>
-    </div>
-  </header>
+  <!-- HEADER -->
+ <header class="header">
+
+  <div class="store-info">
+
+    <!-- STORE LOGO -->
+    <img
+      *ngIf="storeLogo"
+      [src]="storeLogo"
+      class="store-logo"
+    />
+
+    <!-- DEFAULT ICON -->
+    <i
+      *ngIf="!storeLogo"
+      class="bi bi-cart-fill"
+    ></i>
+
+    <!-- STORE NAME -->
+    <strong class="store-name">
+
+      {{ storeName }}
+
+    </strong>
+
+  </div>
+
+  <div class="header-actions">
+
+    <button
+      class="filter-toggle-btn"
+      (click)="toggleFilter()"
+    >
+      <i class="bi bi-funnel-fill"></i>
+      Filter
+    </button>
+
+    <a
+      routerLink="/cart"
+      class="cart-btn"
+    >
+      Cart 🛍️
+    </a>
+
+  </div>
+
+</header>
 
   <!-- FILTER PANEL -->
-  <div class="filter-wrapper" *ngIf="isFilterOpen">
+  <div
+    class="filter-wrapper"
+    *ngIf="isFilterOpen"
+  >
+
     <div class="filter-card">
 
       <div class="filter-header">
+
         <h3>Filters</h3>
-        <button class="close-btn" (click)="toggleFilter()">✕</button>
+
+        <button
+          class="close-btn"
+          (click)="toggleFilter()"
+        >
+          ✕
+        </button>
+
       </div>
 
+      <!-- CATEGORY -->
       <div class="filter-section">
-        <label class="filter-label">Category</label>
-        <select class="filter-select" [(ngModel)]="selectedCategory" (change)="applyFilter()">
-          <option value="">All Categories</option>
-          <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+
+        <label class="filter-label">
+          Category
+        </label>
+
+        <select
+          class="filter-select"
+          [(ngModel)]="selectedCategory"
+          (change)="applyFilter()"
+        >
+
+          <option value="">
+            All Categories
+          </option>
+
+          <option
+            *ngFor="let cat of categories"
+            [value]="cat"
+          >
+            {{ cat }}
+          </option>
+
         </select>
+
       </div>
 
+      <!-- PRODUCT -->
       <div class="filter-section">
-        <label class="filter-label">Product Name</label>
-        <select class="filter-select" [(ngModel)]="selectedProduct" (change)="applyFilter()">
-          <option value="">All Products</option>
-          <option *ngFor="let p of allProducts" [value]="p.name">{{ p.name }}</option>
+
+        <label class="filter-label">
+          Product Name
+        </label>
+
+        <select
+          class="filter-select"
+          [(ngModel)]="selectedProduct"
+          (change)="applyFilter()"
+        >
+
+          <option value="">
+            All Products
+          </option>
+
+          <option
+            *ngFor="let p of allProducts"
+            [value]="p.name"
+          >
+            {{ p.name }}
+          </option>
+
         </select>
+
       </div>
 
+      <!-- PRICE -->
       <div class="filter-section">
+
         <div class="filter-label-row">
+
           <span>Price Range</span>
-          <button class="reset-btn" (click)="resetPrice()">Reset</button>
+
+          <button
+            class="reset-btn"
+            (click)="resetPrice()"
+          >
+            Reset
+          </button>
+
         </div>
+
         <div class="price-boxes">
+
           <div class="price-box">
-            <span class="price-label">From Rs</span>
-            <span class="price-value">{{ priceMin }}</span>
+
+            <span class="price-label">
+              From Rs
+            </span>
+
+            <span class="price-value">
+              {{ priceMin }}
+            </span>
+
           </div>
-          <span class="price-separator">—</span>
+
+          <span class="price-separator">
+            —
+          </span>
+
           <div class="price-box">
-            <span class="price-label">To Rs</span>
-            <span class="price-value">{{ priceMax }}</span>
+
+            <span class="price-label">
+              To Rs
+            </span>
+
+            <span class="price-value">
+              {{ priceMax }}
+            </span>
+
           </div>
+
         </div>
-        <input class="filter-range" type="range" min="0" max="100000" step="100" [(ngModel)]="priceMin" (input)="applyFilter()"/>
-        <input class="filter-range" type="range" min="0" max="100000" step="100" [(ngModel)]="priceMax" (input)="applyFilter()"/>
+
+        <input
+          class="filter-range"
+          type="range"
+          min="0"
+          max="100000"
+          step="100"
+          [(ngModel)]="priceMin"
+          (input)="applyFilter()"
+        />
+
+        <input
+          class="filter-range"
+          type="range"
+          min="0"
+          max="100000"
+          step="100"
+          [(ngModel)]="priceMax"
+          (input)="applyFilter()"
+        />
+
       </div>
 
+      <!-- FOOTER -->
       <div class="filter-footer">
-        <button class="btn-apply" (click)="toggleFilter()">Show Results</button>
-        <button class="btn-reset" (click)="resetAll()">Reset All</button>
+
+        <button
+          class="btn-apply"
+          (click)="toggleFilter()"
+        >
+          Show Results
+        </button>
+
+        <button
+          class="btn-reset"
+          (click)="resetAll()"
+        >
+          Reset All
+        </button>
+
       </div>
 
     </div>
+
   </div>
 
+  <!-- PRODUCTS -->
   <div class="grid">
-    <div class="card" *ngFor="let p of products">
-      
+
+    <div
+      class="card"
+      *ngFor="let p of products"
+    >
+
       <div class="img-box">
-        <img [src]="p.image || 'assets/no-image.png'" />
+
+        <img
+          [src]="p.image || 'assets/no-image.png'"
+        />
+
       </div>
 
       <div class="content">
-        <h3>{{ p.name || "--" }}</h3>
-        <p class="category">{{ p.category || "--" }}</p>
-        <p class="price">Rs {{ p.price || "--" }}</p>
+
+        <h3>
+          {{ p.name || "--" }}
+        </h3>
+
+        <p class="category">
+          {{ p.category || "--" }}
+        </p>
+
+        <p class="price">
+          Rs {{ p.price || "--" }}
+        </p>
 
         <button (click)="addToCart(p)">
           Add to Cart
         </button>
+
       </div>
 
     </div>
+
   </div>
 
 </div>

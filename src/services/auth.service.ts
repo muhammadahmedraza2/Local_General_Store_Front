@@ -34,45 +34,27 @@ export class AuthService {
   // SAVE USER (IMPORTANT FIX)
   // ==========================
 
-  // saveUser(res: any) {
-  //   localStorage.setItem('token', res.token);
 
-  //   // ✅ res.user ke andar se lo (register response)
-  //   // ✅ ya directly res se lo (login response)
-  //   const userData = res.user || res;
+// saveUser(res: any) {
+//   if (res.token) {
+//     localStorage.setItem('token', res.token);
+//   }
 
-  //   const user = {
-  //     userId: userData.id || userData.userId,
-  //     name: userData.name,
-  //     email: userData.email,
-  //     role: userData.role,
-  //     imageUrl: userData.imageUrl || null   // ✅ ab sahi se milega
-  //   };
+//   const userData = res.user || res;
 
-  //   localStorage.setItem('user', JSON.stringify(user));
-  // }
+//   const user = {
+//     userId: userData.id || userData.userId,
+//     name: userData.name,
+//     email: userData.email,
+//     role: userData.role,
+//     imageUrl: userData.imageUrl || null
+//   };
 
-
-  // saveUser(res: any) {
-  //   localStorage.setItem('token', res.token);
-
-  //   const userData = res.user || res;
-
-  //   const user = {
-  //     userId: userData.id || userData.userId,
-  //     name: userData.name,
-  //     email: userData.email,
-  //     role: userData.role,
-  //     phoneNumber: userData.phoneNumber || '',
-  //     dateOfBirth: userData.dateOfBirth || '',
-  //     gender: userData.gender || '',
-  //     imageUrl: userData.imageUrl || null
-  //   };
-
-  //   localStorage.setItem('user', JSON.stringify(user));
-  //   localStorage.setItem('userId', String(userData.id || userData.userId)); // ✅ userId alag save karo
-
-  // }
+//   localStorage.setItem('user', JSON.stringify(user));
+  
+//   // ✅ userId alag se bhi save karo
+//   localStorage.setItem('userId', String(userData.id || userData.userId || ''));
+// }
 
 saveUser(res: any) {
   if (res.token) {
@@ -82,37 +64,23 @@ saveUser(res: any) {
   const userData = res.user || res;
 
   const user = {
-    userId: userData.id || userData.userId,
-    name: userData.name,
-    email: userData.email,
-    role: userData.role,
-    imageUrl: userData.imageUrl || null
+    userId:      userData.id          || userData.userId,
+    name:        userData.name,
+    email:       userData.email,
+    role:        userData.role,
+    phone:       userData.phone       || '',   // ✅ add karo
+    gender:      userData.gender      || '',   // ✅ add karo
+    dateOfBirth: userData.dateOfBirth || '',   // ✅ add karo
+    storeName:   userData.storeName   || '',   // ✅ add karo
+    storeLogo:   userData.storeLogo   || null, // ✅ add karo
+    profileImage: userData.profileImage || userData.imageUrl || null // ✅ add karo
   };
 
   localStorage.setItem('user', JSON.stringify(user));
-  
-  // ✅ userId alag se bhi save karo
   localStorage.setItem('userId', String(userData.id || userData.userId || ''));
 }
 
 
-  // saveUser(res: any) {
-  //   localStorage.setItem('token', res.token);
-
-  //   const user = {
-  //     userId: res.userId,
-  //     name: res.name,
-  //     email: res.email,
-  //     role: res.role,
-  //     imageUrl: res.imageUrl || null
-  //   };
-
-  //   localStorage.setItem('user', JSON.stringify(user));
-  // }
-
-  // ==========================
-  // GET USER
-  // ==========================
   getUser() {
     return JSON.parse(localStorage.getItem('user') || '{}');
   }

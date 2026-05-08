@@ -1,48 +1,66 @@
-<div class="login-container">
+<form [formGroup]="form" class="login-container">
 
   <div class="login-card">
 
     <h2>Welcome Back 👋</h2>
     <p class="subtitle">Login to your account</p>
 
-    <!-- EMAIL / PHONE -->
+    <!-- EMAIL -->
     <div class="input-group">
-      <input type="text" [(ngModel)]="email" placeholder="Email or Phone" />
+      <input
+        type="text"
+        formControlName="email"
+        placeholder="Email or Phone"
+        [ngClass]="{
+          'is-invalid': form.get('email')?.invalid && form.get('email')?.touched
+        }"
+      />
+
+      <small class="error-text"
+        *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+        Email is required
+      </small>
     </div>
 
     <!-- PASSWORD -->
-<div class="input-group password-group">
+    <div class="input-group password-group">
 
-  <input
-    [type]="showPassword ? 'text' : 'password'"
-    [(ngModel)]="password"
-    placeholder="Password"
-  />
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        formControlName="password"
+        placeholder="Password"
+        [ngClass]="{
+          'is-invalid': form.get('password')?.invalid && form.get('password')?.touched
+        }"
+      />
 
-  <span class="toggle" (click)="togglePassword()">
+      <span class="toggle" (click)="togglePassword()">
+        <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+      </span>
 
-    <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
-
-  </span>
-
-</div>
+      <small class="error-text"
+        *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+        Password is required
+      </small>
+    </div>
 
     <!-- LOGIN BUTTON -->
-    <button class="login-btn" (click)="login()">Login</button>
+    <button class="login-btn" (click)="login()" type="button">
+      Login
+    </button>
 
     <div class="divider">OR</div>
 
     <!-- GOOGLE LOGIN -->
-    <!-- <button class="google-btn" (click)="loginWithGoogle()"> -->
-
-<button  class="google-btn" (click)="loginWithGoogle()">
+    <button class="google-btn" (click)="loginWithGoogle()" type="button">
       Continue with Google
     </button>
 
     <p class="footer">
-      Don't have an account? <span routerLink="/register">Register</span>
+      Don't have an account?
+      <span routerLink="/register">Register</span>
     </p>
 
   </div>
 
-</div>
+</form>

@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+
+  --theme-primary: #0d5cab;
+  --theme-bg: #f5f7fb;
+
+  --font-ui: Arial, Helvetica, sans-serif;
+  --font-size-base: 15px;
+
+}
+
+/* GLOBAL APP STYLE */
+
+body {
+
+  margin: 0;
+  padding: 0;
+
+  background: var(--theme-bg);
+  font-family: var(--font-ui);
+
+  font-size: var(--font-size-base);
+
+  transition: all 0.3s ease;
+
+}
+
+/* COMMON CLASSES */
+
+.theme-bg {
+  background: var(--theme-bg);
+}
+
+.theme-primary {
+  color: var(--theme-primary);
+}
+
+.theme-btn {
+
+  background: var(--theme-primary);
+  color: white;
+
+  border: none;
+
+}
