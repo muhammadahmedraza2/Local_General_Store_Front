@@ -63,16 +63,20 @@ export class CartComponent implements OnInit {
   }
 
   // ✅ CHECKOUT — Database mein save
+
 checkout() {
-  // ✅ Saari jagah se userId try karo
+
   let userId = localStorage.getItem('userId');
-  
+
+  const user = JSON.parse(
+    localStorage.getItem('user') || '{}'
+  );
+
   if (!userId) {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
     userId = String(user?.userId || user?.id || '');
   }
 
-  console.log('UserId:', userId); // ← check karo
+  console.log('UserId:', userId);
 
   if (!userId || userId === 'undefined' || userId === '') {
     alert('Please logout and login again!');
@@ -85,10 +89,17 @@ checkout() {
   }
 
   const order = {
+
     orderNumber: 'ORD-' + Date.now(),
+
     totalAmount: this.subtotal,
+
     status: 'Pending',
-    userId: userId,         // ✅ ab sahi value hogi
+
+    userId: userId,
+
+    userName: user?.name || user?.fullName || '', // ⭐ ADD THIS
+
     items: this.cartItems.map(item => ({
       productId: item.productId,
       productName: item.productName,
@@ -98,22 +109,84 @@ checkout() {
     }))
   };
 
-  console.log('ORDER:', order); // ← full order dekho
+  console.log('ORDER:', order);
 
   this.loading = true;
 
   this.orderService.placeOrder(order).subscribe({
     next: () => {
+
       this.loading = false;
+
       this.cartService.clearCart();
+
       alert('Order placed successfully! ✅');
+
       this.router.navigate(['/order-history']);
+
     },
     error: (err) => {
+
       this.loading = false;
+
       console.error('Order Error:', err);
+
       alert('Order failed! ❌');
     }
   });
 }
+
+// checkout() {
+//   // ✅ Saari jagah se userId try karo
+//   let userId = localStorage.getItem('userId');
+  
+//   if (!userId) {
+//     const user = JSON.parse(localStorage.getItem('user') || '{}');
+//     userId = String(user?.userId || user?.id || '');
+//   }
+
+//   console.log('UserId:', userId); // ← check karo
+
+//   if (!userId || userId === 'undefined' || userId === '') {
+//     alert('Please logout and login again!');
+//     return;
+//   }
+
+//   if (this.cartItems.length === 0) {
+//     alert('Cart is empty!');
+//     return;
+//   }
+
+//   const order = {
+//     orderNumber: 'ORD-' + Date.now(),
+//     totalAmount: this.subtotal,
+//     status: 'Pending',
+//     userId: userId,         // ✅ ab sahi value hogi
+//     items: this.cartItems.map(item => ({
+//       productId: item.productId,
+//       productName: item.productName,
+//       price: Number(item.price),
+//       quantity: Number(item.quantity),
+//       image: item.image || ''
+//     }))
+//   };
+
+//   console.log('ORDER:', order); // ← full order dekho
+
+//   this.loading = true;
+
+//   this.orderService.placeOrder(order).subscribe({
+//     next: () => {
+//       this.loading = false;
+//       this.cartService.clearCart();
+//       alert('Order placed successfully! ✅');
+//       this.router.navigate(['/order-history']);
+//     },
+//     error: (err) => {
+//       this.loading = false;
+//       console.error('Order Error:', err);
+//       alert('Order failed! ❌');
+//     }
+//   });
+// }
 }
