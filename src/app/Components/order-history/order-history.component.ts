@@ -25,34 +25,66 @@ export class OrderHistoryComponent implements OnInit {
     this.loadOrders();
   }
 
-  loadOrders() {
-    // ✅ userId lo — logout ke baad bhi kaam kare
-    let userId = localStorage.getItem('userId');
+  // loadOrders() {
+  //   // ✅ userId lo — logout ke baad bhi kaam kare
+  //   let userId = localStorage.getItem('userId');
 
-    if (!userId) {
-      const user = JSON.parse(localStorage.getItem('user') || '{}');
-      userId = String(user?.userId || user?.id || '');
-    }
+  //   if (!userId) {
+  //     const user = JSON.parse(localStorage.getItem('user') || '{}');
+  //     userId = String(user?.userId || user?.id || '');
+  //   }
 
-    if (!userId || userId === 'undefined') {
-      this.loading = false;
-      alert('Please login to view order history!');
-      this.router.navigate(['/login']);
-      return;
-    }
+  //   if (!userId || userId === 'undefined') {
+  //     this.loading = false;
+  //     alert('Please login to view order history!');
+  //     this.router.navigate(['/login']);
+  //     return;
+  //   }
 
-    this.orderService.getOrdersByUser(userId).subscribe({
-      next: (res) => {
-        this.orders = res;
-        this.filteredOrders = res;
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error(err);
-        this.loading = false;
-      }
-    });
+  //   this.orderService.getOrdersByUser(userId).subscribe({
+  //     next: (res) => {
+  //       this.orders = res;
+  //       this.filteredOrders = res;
+  //       this.loading = false;
+  //     },
+  //     error: (err) => {
+  //       console.error(err);
+  //       this.loading = false;
+  //     }
+  //   });
+  // }
+
+// OrderHistoryComponent mein loadOrders() fix:
+loadOrders() {
+  let userId = localStorage.getItem('userId');
+
+  if (!userId) {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    userId = String(user?.userId || user?.id || '');
   }
+
+  console.log('🔍 userId being sent:', userId); // ← yeh dekho console mein
+
+  if (!userId || userId === 'undefined' || userId === 'null') {
+    this.loading = false;
+    alert('Please login to view order history!');
+    this.router.navigate(['/login']);
+    return;
+  }
+
+  this.orderService.getOrdersByUser(userId).subscribe({
+    next: (res) => {
+      console.log('✅ Orders received:', res); // ← kitne orders aaye
+      this.orders = res;
+      this.filteredOrders = res;
+      this.loading = false;
+    },
+    error: (err) => {
+      console.error('❌ Order fetch error:', err); // ← exact error dekho
+      this.loading = false;
+    }
+  });
+}
 
   // ✅ Search
   search(event: any) {

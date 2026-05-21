@@ -55,4 +55,18 @@ export class LayoutComponent implements OnInit {
   logout() {
     this.auth.logout();
   }
+
+getProfileImage(): string {
+  const img = this.user?.imageUrl 
+    || this.user?.profileImage 
+    || this.user?.profilePicture
+    || this.user?.image
+    || this.user?.storeLogo;
+    
+  if (img) {
+    return 'http://localhost:5000/Uploads/' + img;
+  }
+  return 'assets/default-avatar.png';
+}
+
 }

@@ -168,4 +168,12 @@ export class HomeComponent implements OnInit {
 
   }
 
+  getStoreLogo(): string {
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const logo = user?.storeLogo;
+  return logo 
+    ? 'http://localhost:5000/Uploads/' + logo 
+    : 'assets/default-store.png';
+}
+
 }

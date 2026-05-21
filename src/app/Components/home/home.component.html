@@ -6,11 +6,17 @@
   <div class="store-info">
 
     <!-- STORE LOGO -->
-    <img
+    <!-- <img
       *ngIf="storeLogo"
       [src]="storeLogo"
       class="store-logo"
-    />
+    /> -->
+
+<img
+  [src]="getStoreLogo()"
+  alt="store logo"
+  style="width: 35px;"
+/>
 
     <!-- DEFAULT ICON -->
     <i
@@ -19,7 +25,7 @@
     ></i>
 
     <!-- STORE NAME -->
-    <strong class="store-name">
+    <strong class="store-name"  style="width: 35px;">
 
       {{ storeName }}
 

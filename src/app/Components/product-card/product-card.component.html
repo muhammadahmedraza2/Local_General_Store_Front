@@ -4,9 +4,12 @@
     {{ product.category }}
   </div>
 
-  <div class="image-box">
-    <img [src]="product.image || 'assets/no-image.png'" />
-  </div>
+<div class="image-box">
+  <img
+    [src]="getImageUrl(product.image)"
+    (error)="onImgError($event)"
+  />
+</div>
 
   <div class="details">
 

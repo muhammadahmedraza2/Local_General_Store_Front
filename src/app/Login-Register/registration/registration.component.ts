@@ -80,100 +80,55 @@ export class RegistrationComponent {
 
   }
 
-  register() {
+register() {
 
-    if (this.form.invalid) {
-
-      this.form.markAllAsTouched();
-
-      alert('Please fill required fields');
-
-      return;
-    }
-
-    const formData = new FormData();
-
-    formData.append(
-      'name',
-      this.form.value.name.trim()
-    );
-
-    formData.append(
-      'email',
-      this.form.value.email.trim()
-    );
-
-    formData.append(
-      'password',
-      this.form.value.password
-    );
-
-    formData.append(
-      'phone',
-      this.form.value.phone || ''
-    );
-
-    formData.append(
-      'storeName',
-      this.form.value.storeName || ''
-    );
-
-    formData.append(
-      'dateOfBirth',
-      this.form.value.dateOfBirth || ''
-    );
-
-    formData.append(
-      'gender',
-      this.form.value.gender || ''
-    );
-
-    // PROFILE IMAGE
-    if (this.selectedFile) {
-
-      formData.append(
-        'profileImage',
-        this.selectedFile
-      );
-
-    }
-
-    // STORE LOGO
-    if (this.storeLogoFile) {
-
-      formData.append(
-        'storeLogo',
-        this.storeLogoFile
-      );
-
-    }
-
-    this.auth.register(formData).subscribe({
-
-      next: (res) => {
-
-        console.log(res);
-
-        this.auth.saveUser(res);
-
-        alert('Registered Successfully');
-
-        this.router.navigate(['/login']);
-
-      },
-
-      error: (err) => {
-
-        console.log(err);
-
-        alert(
-          err.error || 'Registration Failed'
-        );
-
-      }
-
-    });
-
+  if (this.form.invalid) {
+    this.form.markAllAsTouched();
+    alert('Please fill required fields');
+    return;
   }
+
+  const formData = new FormData();
+
+  formData.append('name', this.form.value.name.trim());
+  formData.append('email', this.form.value.email.trim());
+  formData.append('password', this.form.value.password);
+
+  // ✅ FIX: backend expects PhoneNumber not phone
+  formData.append('phoneNumber', this.form.value.phone || '');
+
+  formData.append('storeName', this.form.value.storeName || '');
+  formData.append('dateOfBirth', this.form.value.dateOfBirth || '');
+  formData.append('gender', this.form.value.gender || '');
+
+  // optional tenant (if needed)
+  formData.append('tenantId', '');
+
+  // PROFILE IMAGE
+  if (this.selectedFile) {
+    formData.append('imageUrl', this.selectedFile);
+  }
+
+  // STORE LOGO
+  if (this.storeLogoFile) {
+    formData.append('storeLogo', this.storeLogoFile);
+  }
+
+  this.auth.register(formData).subscribe({
+
+    next: (res) => {
+      console.log(res);
+      this.auth.saveUser(res);
+      alert('Registered Successfully');
+      this.router.navigate(['/login']);
+    },
+
+    error: (err) => {
+      console.log(err);
+      alert(err.error || 'Registration Failed');
+    }
+
+  });
+}
 
 }

@@ -15,14 +15,10 @@
 
     <!-- User Info (DYNAMIC IMAGE) -->
     <div class="user-box" *ngIf="!isCollapsed && user">
-      <img
-        [src]="
-          user?.imageUrl
-            ? 'http://localhost:5000/Uploads/' + user.imageUrl
-            : 'assets/default-avatar.png'
-        "
-        alt="user"
-      />
+   <img
+  [src]="getProfileImage()"
+  alt="user"
+/>
 
       <h6>{{ user?.name || "User" }}</h6>
       <span>{{ user?.role || "User" }}</span>
@@ -101,12 +97,10 @@
     </span>
   </div>
 
-  <img
-    [src]="user?.imageUrl
-      ? 'http://localhost:5000/Uploads/' + user.imageUrl
-      : 'assets/default-avatar.png'"
-    alt="user"
-  />
+   <img
+  [src]="getProfileImage()"
+  alt="user"
+/>
 
 </div>
     </header>
