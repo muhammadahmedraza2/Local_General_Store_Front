@@ -6,7 +6,32 @@ html, body {
   background: linear-gradient(135deg, #eef2f7, #d9e4f5);
   /* overflow: hidden HATAYA — scroll ke liye */
 }
+.pagination-box{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+  margin:30px 0;
+}
 
+.page-btn{
+  border:none;
+  padding:10px 20px;
+  border-radius:8px;
+  background:#198754;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.page-btn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+.page-text{
+  font-weight:600;
+}
 /* ===== MAIN CONTAINER ===== */
 .container {
   height: 100vh;

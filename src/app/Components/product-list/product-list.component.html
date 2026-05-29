@@ -5,15 +5,25 @@
     Smart Store
   </div>
 
-  <!-- ✅ ONLY ONE SCROLL AREA -->
+  <!-- CONTENT -->
   <div class="content-area">
 
-<button class="products-btn" [disabled]="products.length === 0">
-  All Products ({{ products.length }})
-</button>
+    <!-- TOTAL PRODUCTS -->
+    <button
+      class="products-btn"
+      [disabled]="products.length === 0">
+
+      All Products ({{ totalRecords }})
+    </button>
 
     <hr />
 
+    <!-- LOADING -->
+    <div *ngIf="loading" class="text-center my-4">
+      Loading products...
+    </div>
+
+    <!-- CATEGORIES -->
     <div *ngFor="let cat of categories">
 
       <h2 class="category-title">
@@ -23,12 +33,39 @@
       <hr />
 
       <div class="product-row">
+
         <app-product-card
           *ngFor="let p of groupedProducts[cat]"
           [product]="p"
           (add)="addToCart(p)">
         </app-product-card>
+
       </div>
+
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination-box">
+
+      <button
+        class="page-btn"
+        (click)="previousPage()"
+        [disabled]="pageNumber === 1">
+
+        Previous
+      </button>
+
+      <span class="page-text">
+        Page {{ pageNumber }} of {{ totalPages }}
+      </span>
+
+      <button
+        class="page-btn"
+        (click)="nextPage()"
+        [disabled]="pageNumber === totalPages">
+
+        Next
+      </button>
 
     </div>
 
